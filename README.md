@@ -1,16 +1,24 @@
-## Hi there 👋
+<p align="center">
+  <img height="90" src="https://andresalpiri.com/icon.png">
+</p>
 
-<!--
-**AndresEduardoRA/AndresEduardoRA** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## Andrés Alpiri
 
-Here are some ideas to get you started:
+> /an-dres al-pi-ri/
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+I'm a Software Engineer who enjoys building high-quality digital products and exploring how technology can solve real-world problems.
+
+I’m interested in web technologies, system design, and creating experiences that are fast, scalable, and pleasant to use.
+
+Currently finishing my Computer Engineering degree and continuously learning new tools, ideas, and ways to build better software.
+
+### 📫 How to reach me:
+
+- Website: https://andresalpiri.com
+- Email: alpiryk@gmail.com
+
+You can also explore my work and projects on this GitHub profile.
+
+-----
+
+Last Edited: 2026****
