@@ -14,7 +14,7 @@ Currently finishing my Computer Engineering degree and continuously learning new
 
 ### 📫 How to reach me:
 
-- Website: https://imandresalpiri.com
+- Website: https://andresalpiri.com
 - Email: alpiryk@gmail.com
 
 You can also explore my work and projects on this GitHub profile.
