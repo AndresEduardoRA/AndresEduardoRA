@@ -15,7 +15,7 @@ Currently finishing my Computer Engineering degree and continuously learning new
 ### 📫 How to reach me:
 
 - Website: https://me.niuvu.com.com
-- Email: alpiryk@gmail.com
+- Email: andres.ra@niuvu.com
 
 You can also explore my work and projects on this GitHub profile.
 
