@@ -1,0 +1,182 @@
+---
+title: "Learning MongoDB and NoSQL Databases"
+description: "I'm diving into MongoDB and learning how NoSQL databases work. It's different from what I expected, but I'm starting to see the benefits."
+publishDate: 2022-06-22
+tags:
+  - "mongodb"
+  - "databases"
+  - "backend"
+draft: false
+---
+
+I've been working with MongoDB for a few months now, and I'm starting to understand how NoSQL databases work.
+
+## Why I Chose MongoDB
+
+When I started learning databases, I chose MongoDB because:
+- It uses JSON-like documents (familiar from JavaScript)
+- It's popular in the Node.js ecosystem
+- It seemed easier than SQL databases
+- Many tutorials use it
+
+Now I'm realizing it's not necessarily "easier" it's just different.
+
+## Understanding Documents
+
+MongoDB stores data in documents (similar to JSON objects):
+
+```javascript
+{
+  _id: ObjectId("..."),
+  name: "John Doe",
+  email: "john@example.com",
+  posts: [
+    { title: "First Post", content: "..." },
+    { title: "Second Post", content: "..." }
+  ]
+}
+```
+
+This feels natural coming from JavaScript.
+
+## Using Mongoose
+
+I'm using Mongoose to work with MongoDB. It adds structure to the flexible MongoDB:
+
+```javascript
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const User = mongoose.model('User', userSchema);
+```
+
+Schemas help me validate data and define relationships.
+
+## What I'm Learning
+
+**Embedding vs Referencing**: This is a key decision in MongoDB.
+
+Embedding (data inside the document):
+```javascript
+{
+  user: "John",
+  posts: [
+    { title: "Post 1", content: "..." },
+    { title: "Post 2", content: "..." }
+  ]
+}
+```
+
+Referencing (separate documents):
+```javascript
+// User document
+{ _id: 1, name: "John" }
+
+// Post documents
+{ _id: 101, userId: 1, title: "Post 1" }
+{ _id: 102, userId: 1, title: "Post 2" }
+```
+
+I'm still figuring out when to use each approach.
+
+## Common Operations
+
+**Creating**:
+```javascript
+const user = new User({ name: "John", email: "john@example.com" });
+await user.save();
+```
+
+**Reading**:
+```javascript
+const users = await User.find();
+const user = await User.findById(id);
+const user = await User.findOne({ email: "john@example.com" });
+```
+
+**Updating**:
+```javascript
+await User.findByIdAndUpdate(id, { name: "Jane" });
+```
+
+**Deleting**:
+```javascript
+await User.findByIdAndDelete(id);
+```
+
+## Mistakes I'm Making
+
+**Not using indexes**: My queries are slow because I'm not indexing fields I search on.
+
+**Over-embedding**: I'm putting too much data in one document, making it huge.
+
+**Not handling errors**: I need better error handling for database operations.
+
+**Forgetting await**: Mongoose operations are async, and I keep forgetting to await them.
+
+## What's Confusing
+
+**When to embed vs reference**: There's no clear rule, it depends on the use case.
+
+**Aggregation pipeline**: It's powerful but complex. I'm still learning it.
+
+**Indexes**: I know they're important for performance, but I don't fully understand them yet.
+
+**Transactions**: MongoDB has transactions now, but I haven't used them.
+
+## Comparing to SQL
+
+I haven't used SQL databases much, but I'm learning the differences:
+
+**MongoDB (NoSQL)**:
+- Flexible schema
+- Stores JSON-like documents
+- Good for hierarchical data
+- Horizontal scaling
+
+**SQL**:
+- Fixed schema
+- Stores data in tables
+- Good for complex relationships
+- ACID transactions
+
+I'm starting to think I should learn SQL too, to understand when to use each.
+
+## What I'm Building
+
+To practice MongoDB, I'm building:
+- A blog with users, posts, and comments
+- A task management app with projects and tasks
+- An e-commerce prototype with products and orders
+
+## Resources I'm Using
+
+- MongoDB University (free courses)
+- Mongoose documentation
+- YouTube tutorials
+- Building projects
+
+## My Current Understanding
+
+MongoDB is good for:
+- Rapid prototyping
+- Flexible data structures
+- JavaScript/Node.js projects
+- Hierarchical data
+
+But I'm realizing it's not always the best choice. Sometimes SQL might be better.
+
+## What's Next
+
+I want to learn:
+- Aggregation pipeline properly
+- Indexing strategies
+- When to use MongoDB vs SQL
+- Database design patterns
+- Performance optimization
+
+MongoDB is powerful, but I'm realizing database design is complex. There's a lot more to learn beyond just CRUD operations.

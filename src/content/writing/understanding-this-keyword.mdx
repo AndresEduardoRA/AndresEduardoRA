@@ -1,0 +1,109 @@
+---
+title: "Understanding JavaScript's 'this' Keyword"
+description: "The 'this' keyword confused me for so long. I'm finally understanding how it works and why it behaves the way it does."
+publishDate: 2022-11-20
+tags:
+  - "javascript"
+  - "fundamentals"
+  - "this"
+draft: false
+---
+
+The `this` keyword in JavaScript has confused me since I started learning. Now it's finally making sense.
+
+## Why 'this' Is Confusing
+
+`this` doesn't work like in other languages. Its value depends on HOW a function is called, not WHERE it's defined.
+
+## The Rules I'm Learning
+
+**1. Default binding** (in regular functions):
+```javascript
+function showThis() {
+  console.log(this); // Window (in browser) or undefined (in strict mode)
+}
+showThis();
+```
+
+**2. Implicit binding** (method calls):
+```javascript
+const obj = {
+  name: 'John',
+  greet() {
+    console.log(this.name); // 'John'
+  }
+};
+obj.greet();
+```
+
+**3. Explicit binding** (call, apply, bind):
+```javascript
+function greet() {
+  console.log(this.name);
+}
+
+const person = { name: 'John' };
+greet.call(person); // 'John'
+```
+
+**4. Arrow functions** (lexical this):
+```javascript
+const obj = {
+  name: 'John',
+  greet: () => {
+    console.log(this.name); // undefined! Arrow functions don't have their own 'this'
+  }
+};
+```
+
+## Common Gotcha
+
+```javascript
+const obj = {
+  name: 'John',
+  greet() {
+    setTimeout(function() {
+      console.log(this.name); // undefined! 'this' is lost
+    }, 1000);
+  }
+};
+```
+
+Fix with arrow function:
+```javascript
+const obj = {
+  name: 'John',
+  greet() {
+    setTimeout(() => {
+      console.log(this.name); // 'John' - arrow function uses outer 'this'
+    }, 1000);
+  }
+};
+```
+
+## When I Use Arrow Functions
+
+Arrow functions are great for callbacks because they don't have their own `this`:
+
+```javascript
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+  
+  start() {
+    setInterval(() => {
+      this.count++; // 'this' refers to Counter instance
+      console.log(this.count);
+    }, 1000);
+  }
+}
+```
+
+## What's Clicking
+
+`this` is determined by the call-site (how the function is called), not by where it's written.
+
+Arrow functions inherit `this` from their surrounding scope, which is why they're useful for callbacks.
+
+Understanding `this` is helping me understand React class components, event handlers, and object-oriented JavaScript better.

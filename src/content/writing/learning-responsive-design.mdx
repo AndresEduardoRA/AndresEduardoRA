@@ -1,0 +1,117 @@
+---
+title: "Getting Better at Responsive Design"
+description: "I'm improving my responsive design skills. It's more than just media queries it's a mindset."
+publishDate: 2022-04-25
+tags:
+  - "css"
+  - "responsive"
+  - "design"
+draft: false
+---
+
+I'm getting better at responsive design, and I'm realizing it's more than just adding media queries.
+
+## Mobile-First Approach
+
+I'm learning to design for mobile first, then add styles for larger screens:
+
+```css
+/* Mobile styles (default) */
+.container {
+  padding: 1rem;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .container {
+    padding: 3rem;
+  }
+}
+```
+
+This is easier than starting with desktop and removing styles for mobile.
+
+## Responsive Units
+
+**rem**: Relative to root font size
+```css
+font-size: 1.5rem; /* 24px if root is 16px */
+```
+
+**em**: Relative to parent font size
+
+**%**: Relative to parent
+
+**vw/vh**: Relative to viewport
+
+**ch**: Width of the "0" character
+
+I'm using rem for most things now.
+
+## Flexible Layouts
+
+**Flexbox** for one-dimensional layouts:
+```css
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.item {
+  flex: 1 1 300px; /* Grow, shrink, base width */
+}
+```
+
+**Grid** for two-dimensional layouts:
+```css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+```
+
+## Responsive Images
+
+```css
+img {
+  max-width: 100%;
+  height: auto;
+}
+```
+
+Or use the `<picture>` element for different images at different sizes.
+
+## Common Breakpoints
+
+I'm using these breakpoints:
+- 640px: Small tablets
+- 768px: Tablets
+- 1024px: Small laptops
+- 1280px: Desktops
+
+But I'm learning to add breakpoints where the design breaks, not at arbitrary sizes.
+
+## What I'm Learning
+
+**Test on real devices**: Simulators aren't enough.
+
+**Touch targets**: Buttons should be at least 44x44px for mobile.
+
+**Readable text**: At least 16px font size on mobile.
+
+**Avoid horizontal scrolling**: Everything should fit the viewport.
+
+## Current Progress
+
+Responsive design is becoming natural. I'm thinking about mobile from the start, not as an afterthought.
+
+My sites now work well on all screen sizes, and I'm getting faster at building responsive layouts.

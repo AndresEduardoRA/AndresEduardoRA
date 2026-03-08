@@ -1,0 +1,119 @@
+---
+title: "Exploring WebSockets for Real-Time Features"
+description: "I'm learning WebSockets to build real-time features. It's different from REST APIs but powerful for live updates."
+publishDate: 2023-11-20
+tags:
+  - "websockets"
+  - "real-time"
+  - "backend"
+draft: false
+---
+
+I'm learning WebSockets to add real-time features to my apps. It's a different paradigm from REST APIs.
+
+## Why WebSockets?
+
+REST APIs are request-response. WebSockets maintain a persistent connection for two-way communication.
+
+Good for:
+- Chat applications
+- Live notifications
+- Real-time dashboards
+- Collaborative editing
+
+## Basic WebSocket
+
+**Server** (using ws library):
+```javascript
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  
+  ws.on('message', (message) => {
+    console.log('Received:', message);
+    ws.send('Echo: ' + message);
+  });
+});
+```
+
+**Client**:
+```javascript
+const ws = new WebSocket('ws://localhost:8080');
+
+ws.onopen = () => {
+  console.log('Connected');
+  ws.send('Hello Server');
+};
+
+ws.onmessage = (event) => {
+  console.log('Received:', event.data);
+};
+```
+
+## Using Socket.IO
+
+Socket.IO makes WebSockets easier:
+
+**Server**:
+```javascript
+const io = require('socket.io')(3000);
+
+io.on('connection', (socket) => {
+  console.log('User connected');
+  
+  socket.on('message', (data) => {
+    io.emit('message', data); // Broadcast to all
+  });
+});
+```
+
+**Client**:
+```javascript
+const socket = io('http://localhost:3000');
+
+socket.emit('message', 'Hello');
+
+socket.on('message', (data) => {
+  console.log(data);
+});
+```
+
+## What I'm Learning
+
+**Rooms**: Group connections
+```javascript
+socket.join('room1');
+io.to('room1').emit('message', 'Hello room');
+```
+
+**Broadcasting**: Send to all except sender
+```javascript
+socket.broadcast.emit('message', 'New user joined');
+```
+
+**Namespaces**: Separate communication channels
+
+## Challenges
+
+**Connection management**: Handling disconnects and reconnects.
+
+**Scaling**: WebSockets are stateful, harder to scale.
+
+**Authentication**: Securing WebSocket connections.
+
+**Fallbacks**: What if WebSockets aren't supported?
+
+## What I'm Building
+
+To practice, I'm building:
+- A simple chat application
+- A real-time notification system
+- A collaborative todo list
+
+## Current Thoughts
+
+WebSockets are powerful for real-time features. They're more complex than REST APIs but necessary for certain use cases.
+
+I'm still learning when to use WebSockets vs polling vs Server-Sent Events.

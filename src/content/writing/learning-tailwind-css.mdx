@@ -1,0 +1,105 @@
+---
+title: "Trying Tailwind CSS"
+description: "I'm experimenting with Tailwind CSS and it's changing how I think about styling. Utility-first CSS is weird but interesting."
+publishDate: 2023-09-25
+tags:
+  - "css"
+  - "tailwind"
+  - "styling"
+draft: false
+---
+
+I'm trying Tailwind CSS and it feels completely different from how I've been writing CSS.
+
+## What Is Tailwind?
+
+Tailwind is a utility-first CSS framework. Instead of writing custom CSS, you use utility classes:
+
+```html
+<div class="flex items-center justify-between p-4 bg-blue-500 text-white rounded-lg">
+  <h1 class="text-2xl font-bold">Hello</h1>
+  <button class="px-4 py-2 bg-white text-blue-500 rounded">Click</button>
+</div>
+```
+
+## First Impressions
+
+**HTML looks messy**: So many classes!
+
+**No context switching**: I don't have to jump between HTML and CSS files.
+
+**Fast development**: I can style things quickly without thinking of class names.
+
+## What I'm Learning
+
+**Responsive design is easy**:
+```html
+<div class="text-sm md:text-base lg:text-lg">
+  Responsive text
+</div>
+```
+
+**Hover states are simple**:
+```html
+<button class="bg-blue-500 hover:bg-blue-700">
+  Hover me
+</button>
+```
+
+**Flexbox and Grid are intuitive**:
+```html
+<div class="flex flex-col md:flex-row gap-4">
+  <div class="flex-1">Column 1</div>
+  <div class="flex-1">Column 2</div>
+</div>
+```
+
+## What I Like
+
+- Fast development
+- Consistent spacing and colors
+- No naming things
+- Responsive design is easy
+- Small bundle size (with purging)
+
+## What I Don't Like
+
+- HTML looks cluttered
+- Learning curve for class names
+- Harder to reuse styles (though @apply helps)
+- Need to learn Tailwind's system
+
+## Comparing to Regular CSS
+
+**Regular CSS**:
+```css
+.button {
+  padding: 0.5rem 1rem;
+  background-color: blue;
+  color: white;
+  border-radius: 0.25rem;
+}
+```
+
+**Tailwind**:
+```html
+<button class="px-4 py-2 bg-blue-500 text-white rounded">
+```
+
+## When to Use Tailwind
+
+I'm thinking Tailwind is good for:
+- Rapid prototyping
+- Projects where you want consistency
+- When you don't want to name things
+
+Maybe not for:
+- Projects with complex, reusable components
+- When you need very custom designs
+- If your team prefers traditional CSS
+
+## Current Thoughts
+
+Tailwind feels weird at first, but I'm getting faster with it. I'm not sure if I prefer it to regular CSS yet, but it's a useful tool to know.
+
+I'm going to keep experimenting and see how I feel after building a few projects with it.

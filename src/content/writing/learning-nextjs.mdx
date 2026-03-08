@@ -1,0 +1,82 @@
+---
+title: "Exploring Next.js After React"
+description: "I'm learning Next.js and discovering features like server-side rendering and file-based routing. It's React, but with superpowers."
+publishDate: 2023-08-30
+tags:
+  - "nextjs"
+  - "react"
+  - "ssr"
+draft: false
+---
+
+After getting comfortable with React, I'm now exploring Next.js. It's React with a lot of extra features built-in.
+
+## Why Next.js?
+
+I kept hearing about it and seeing it in job postings. I wanted to understand what makes it different from Create React App.
+
+## What's Different
+
+**File-based routing**: No need for React Router. Files in the `pages` directory automatically become routes.
+
+```
+pages/
+  index.js       → /
+  about.js       → /about
+  blog/
+    index.js     → /blog
+    [slug].js    → /blog/:slug
+```
+
+**Server-side rendering**: Pages can render on the server, improving SEO and initial load time.
+
+**API routes**: I can build API endpoints right in my Next.js app.
+
+**Image optimization**: The `<Image>` component automatically optimizes images.
+
+## What I'm Learning
+
+**getServerSideProps**: Fetch data on the server for each request:
+```javascript
+export async function getServerSideProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+```
+
+**getStaticProps**: Fetch data at build time:
+```javascript
+export async function getStaticProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+```
+
+**API Routes**: Create API endpoints:
+```javascript
+// pages/api/hello.js
+export default function handler(req, res) {
+  res.status(200).json({ message: 'Hello' });
+}
+```
+
+## What's Confusing
+
+**When to use SSR vs SSG vs CSR**: Server-side rendering, static site generation, or client-side rendering?
+
+**Data fetching methods**: getServerSideProps, getStaticProps, getStaticPaths when do I use each?
+
+**App directory vs pages directory**: Next.js 13 introduced a new app directory and I'm not sure which to use.
+
+## What I'm Building
+
+To practice Next.js, I'm building:
+- A blog with static generation
+- A dashboard with server-side rendering
+- An app with API routes
+
+## Current Thoughts
+
+Next.js feels like React with batteries included. It solves problems I didn't know I had (routing, SSR, optimization).
+
+I'm still learning when to use its features, but I'm seeing why it's so popular.

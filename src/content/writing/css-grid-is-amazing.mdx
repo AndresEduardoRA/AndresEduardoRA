@@ -1,0 +1,91 @@
+---
+title: "CSS Grid Is Amazing"
+description: "I'm finally learning CSS Grid properly and it's changing how I build layouts. It's more powerful than I thought."
+publishDate: 2022-08-05
+tags:
+  - "css"
+  - "grid"
+  - "layout"
+draft: false
+---
+
+I've been avoiding CSS Grid because Flexbox seemed good enough. But now that I'm learning Grid, I'm realizing what I was missing.
+
+## Why I Avoided Grid
+
+- Flexbox worked for most things
+- Grid seemed complicated
+- I didn't understand when to use it
+
+## What's Different About Grid
+
+Flexbox is one-dimensional (row OR column). Grid is two-dimensional (rows AND columns).
+
+This makes Grid perfect for page layouts.
+
+## Basic Grid
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+```
+
+This creates three equal columns with gaps between them.
+
+## What I'm Learning
+
+**fr unit**: Fractional unit that divides available space:
+```css
+grid-template-columns: 1fr 2fr 1fr; /* Middle column is twice as wide */
+```
+
+**repeat()**: Avoid repetition:
+```css
+grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+```
+
+**Grid areas**: Name areas of your grid:
+```css
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "sidebar main main"
+    "footer footer footer";
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+```
+
+## Responsive Grids
+
+**auto-fit and auto-fill**:
+```css
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+```
+
+This creates responsive columns without media queries!
+
+## When to Use Grid vs Flexbox
+
+I'm learning:
+- **Grid**: Page layouts, two-dimensional layouts
+- **Flexbox**: Component layouts, one-dimensional layouts
+
+Often I use both together.
+
+## What I'm Building
+
+To practice Grid, I'm rebuilding layouts:
+- Dashboard layouts
+- Card grids
+- Magazine-style layouts
+- Complex page structures
+
+Grid is making layouts that seemed complex actually simple. I wish I had learned this sooner.

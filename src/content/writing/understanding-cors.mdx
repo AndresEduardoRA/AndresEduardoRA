@@ -1,0 +1,76 @@
+---
+title: "Finally Understanding CORS"
+description: "CORS errors frustrated me for months. Now I'm understanding what CORS is and how to handle it properly."
+publishDate: 2022-12-08
+tags:
+  - "cors"
+  - "backend"
+  - "security"
+draft: false
+---
+
+CORS errors have frustrated me since I started building APIs. Now I'm finally understanding what's happening.
+
+## What Is CORS?
+
+CORS (Cross-Origin Resource Sharing) is a security feature in browsers.
+
+It prevents a website from making requests to a different domain without permission.
+
+## The Problem
+
+My frontend (localhost:3000) tries to call my API (localhost:5000):
+
+```javascript
+fetch('http://localhost:5000/api/users')
+```
+
+Browser blocks it: "CORS policy: No 'Access-Control-Allow-Origin' header"
+
+## Why CORS Exists
+
+Without CORS, malicious websites could make requests to other sites using your cookies/credentials.
+
+CORS protects users from these attacks.
+
+## The Solution
+
+My API needs to explicitly allow requests from my frontend:
+
+```javascript
+// Express
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+```
+
+## What I'm Learning
+
+**Simple requests**: GET, POST with simple headers browser sends request directly.
+
+**Preflight requests**: PUT, DELETE, custom headers browser sends OPTIONS request first to check if allowed.
+
+**Credentials**: Cookies/auth headers need special configuration:
+```javascript
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+```
+
+## Common Mistakes
+
+**Using `origin: '*'` in production**: Allows any website to call your API.
+
+**Not handling preflight**: OPTIONS requests need proper response.
+
+**Wrong origin**: Must match exactly (including protocol and port).
+
+## Current Understanding
+
+CORS is a security feature, not a bug. It protects users.
+
+My API needs to explicitly allow which origins can access it.
+
+Understanding CORS is making API development less frustrating.

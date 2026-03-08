@@ -1,0 +1,129 @@
+---
+title: "Starting to Learn Testing"
+description: "I'm finally learning how to test my code. It feels slow at first, but I'm starting to see why testing matters."
+publishDate: 2023-04-10
+tags:
+  - "testing"
+  - "jest"
+  - "quality"
+draft: false
+---
+
+I've been avoiding testing for too long. Now I'm finally learning it, and it's changing how I write code.
+
+## Why I Avoided Testing
+
+- It seemed complicated
+- Writing tests felt slow
+- My projects were small
+- I could just test manually
+
+These were excuses. I'm realizing testing is important.
+
+## What I'm Learning
+
+I'm using Jest for testing JavaScript:
+
+```javascript
+// sum.js
+function sum(a, b) {
+  return a + b;
+}
+
+// sum.test.js
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+```
+
+## Types of Tests
+
+**Unit tests**: Test individual functions
+```javascript
+test('validates email format', () => {
+  expect(isValidEmail('test@example.com')).toBe(true);
+  expect(isValidEmail('invalid')).toBe(false);
+});
+```
+
+**Integration tests**: Test how parts work together
+```javascript
+test('creates user and saves to database', async () => {
+  const user = await createUser({ name: 'John', email: 'john@example.com' });
+  expect(user.id).toBeDefined();
+  expect(user.name).toBe('John');
+});
+```
+
+## What Testing Is Teaching Me
+
+**Write testable code**: Functions should be small and focused.
+
+**Think about edge cases**: What if the input is null? Empty? Invalid?
+
+**Catch bugs early**: Tests catch bugs before users do.
+
+**Refactor confidently**: If tests pass, I probably didn't break anything.
+
+## Common Patterns
+
+**Arrange, Act, Assert**:
+```javascript
+test('user login', () => {
+  // Arrange
+  const user = { email: 'test@example.com', password: 'password123' };
+  
+  // Act
+  const result = login(user);
+  
+  // Assert
+  expect(result.success).toBe(true);
+});
+```
+
+**Mocking**: Fake external dependencies:
+```javascript
+jest.mock('./database');
+
+test('fetches user', async () => {
+  database.getUser.mockResolvedValue({ id: 1, name: 'John' });
+  const user = await fetchUser(1);
+  expect(user.name).toBe('John');
+});
+```
+
+## What's Hard
+
+**Knowing what to test**: Do I test everything? Just important parts?
+
+**Mocking**: Faking dependencies is confusing.
+
+**Async tests**: Testing promises and async/await properly.
+
+**Test setup**: Creating test data and cleaning up.
+
+## What I'm Noticing
+
+Writing tests is making me write better code:
+- Smaller functions
+- Clearer responsibilities
+- Better error handling
+- More predictable behavior
+
+## My Current Approach
+
+I'm starting small:
+- Test utility functions first
+- Add tests to new features
+- Don't try to test everything at once
+
+## Resources I'm Using
+
+- Jest documentation
+- Testing JavaScript course
+- Reading other people's tests
+- Practice, practice, practice
+
+Testing feels slow now, but I'm seeing the value. When I refactor code and tests still pass, I feel confident I didn't break anything.
+
+I wish I had started learning testing sooner.

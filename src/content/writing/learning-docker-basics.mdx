@@ -1,0 +1,91 @@
+---
+title: "Starting to Learn Docker"
+description: "I'm beginning to understand Docker and containerization. It's confusing at first but I'm seeing why it's useful."
+publishDate: 2023-05-22
+tags:
+  - "docker"
+  - "devops"
+  - "tools"
+draft: false
+---
+
+I'm starting to learn Docker, and it's one of those things that seems complicated until it clicks.
+
+## Why I'm Learning Docker
+
+I keep hearing about Docker in job postings and tutorials. I'm realizing it's becoming essential for modern development.
+
+Also, I'm tired of "it works on my machine" problems.
+
+## What Is Docker?
+
+Docker lets you package your application with all its dependencies into a container. The container runs the same way everywhere.
+
+Think of it like a lightweight virtual machine (though it's not actually a VM).
+
+## Basic Concepts I'm Learning
+
+**Image**: A blueprint for a container. Like a class in programming.
+
+**Container**: A running instance of an image. Like an object.
+
+**Dockerfile**: Instructions for building an image.
+
+## My First Dockerfile
+
+```dockerfile
+FROM node:16
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+This creates an image for a Node.js app.
+
+## Basic Commands
+
+```bash
+# Build an image
+docker build -t my-app .
+
+# Run a container
+docker run -p 3000:3000 my-app
+
+# List running containers
+docker ps
+
+# Stop a container
+docker stop container-id
+```
+
+## What's Confusing
+
+**Images vs containers**: I keep mixing these up.
+
+**Volumes**: How to persist data when containers are temporary.
+
+**Networking**: How containers talk to each other.
+
+**Docker Compose**: Managing multiple containers together.
+
+## What I'm Noticing
+
+**Consistent environments**: My app runs the same way on my computer and on a server.
+
+**Easy setup**: New developers can run my project with just `docker-compose up`.
+
+**Isolation**: Each project has its own environment, no conflicts.
+
+## Current Understanding
+
+Docker is solving the "works on my machine" problem by packaging everything the app needs into a container.
+
+I'm still learning, but I'm seeing why Docker is so popular. It makes deployment and development environments much more manageable.

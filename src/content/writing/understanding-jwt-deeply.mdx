@@ -1,0 +1,97 @@
+---
+title: "Understanding JWTs More Deeply"
+description: "I've been using JWTs for authentication, but now I'm learning how they actually work and their security implications."
+publishDate: 2023-01-28
+tags:
+  - "jwt"
+  - "authentication"
+  - "security"
+draft: false
+---
+
+I've been using JWTs for a while, but I'm just now understanding how they actually work under the hood.
+
+## JWT Structure
+
+A JWT has three parts separated by dots:
+
+```
+header.payload.signature
+```
+
+**Header**: Algorithm and token type
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+
+**Payload**: Data (claims)
+```json
+{
+  "userId": "123",
+  "email": "user@example.com",
+  "exp": 1234567890
+}
+```
+
+**Signature**: Verifies the token hasn't been tampered with
+
+## How Signing Works
+
+```javascript
+const signature = HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  secret
+);
+```
+
+The signature proves the token was created by someone with the secret key.
+
+## Important: JWTs Are NOT Encrypted
+
+The payload is base64-encoded, not encrypted. Anyone can decode and read it:
+
+```javascript
+const payload = JSON.parse(atob(token.split('.')[1]));
+```
+
+**Never put sensitive data in JWTs!**
+
+## What I'm Learning
+
+**Expiration**: Always set an expiration time
+```javascript
+jwt.sign(payload, secret, { expiresIn: '7d' });
+```
+
+**Refresh tokens**: Long-lived tokens for getting new access tokens.
+
+**Token storage**: Where to store tokens (localStorage vs cookies).
+
+**Revocation**: JWTs can't be revoked easily (they're stateless).
+
+## Security Considerations
+
+**Use HTTPS**: Tokens can be intercepted over HTTP.
+
+**Short expiration**: Limit damage if token is stolen.
+
+**Secure secret**: Use a strong, random secret key.
+
+**Validate everything**: Always verify the signature.
+
+## Common Mistakes
+
+**Storing sensitive data**: JWTs are readable by anyone.
+
+**No expiration**: Tokens should expire.
+
+**Weak secrets**: Use strong, random secrets.
+
+**Not validating**: Always verify tokens on the server.
+
+## Current Understanding
+
+JWTs are useful for stateless authentication, but they're not perfect. Understanding how they work helps me use them securely.

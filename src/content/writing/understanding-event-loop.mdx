@@ -1,0 +1,100 @@
+---
+title: "Understanding the JavaScript Event Loop"
+description: "The event loop is how JavaScript handles async code. I'm finally understanding how it works under the hood."
+publishDate: 2023-06-12
+tags:
+  - "javascript"
+  - "async"
+  - "fundamentals"
+draft: false
+---
+
+I've been using async JavaScript for a while, but I'm just now understanding HOW it works the event loop.
+
+## What Is the Event Loop?
+
+JavaScript is single-threaded, but it can handle async operations. The event loop is how it does this.
+
+## The Call Stack
+
+JavaScript executes code using a call stack:
+
+```javascript
+function first() {
+  console.log('First');
+}
+
+function second() {
+  first();
+  console.log('Second');
+}
+
+second();
+```
+
+Call stack:
+1. `second()` is pushed
+2. `first()` is pushed
+3. `first()` finishes, popped
+4. `second()` finishes, popped
+
+## Web APIs
+
+Async operations (setTimeout, fetch, etc.) are handled by Web APIs, not JavaScript:
+
+```javascript
+console.log('Start');
+
+setTimeout(() => {
+  console.log('Timeout');
+}, 0);
+
+console.log('End');
+
+// Output: Start, End, Timeout
+```
+
+Why? Because setTimeout goes to the Web API, then to the callback queue, then back to the call stack.
+
+## The Event Loop Process
+
+1. Execute synchronous code
+2. When async operation completes, callback goes to queue
+3. Event loop checks: is call stack empty?
+4. If yes, move callback from queue to call stack
+5. Execute callback
+
+## Microtasks vs Macrotasks
+
+**Microtasks** (promises): Higher priority
+```javascript
+console.log('Start');
+
+Promise.resolve().then(() => console.log('Promise'));
+
+setTimeout(() => console.log('Timeout'), 0);
+
+console.log('End');
+
+// Output: Start, End, Promise, Timeout
+```
+
+Promises execute before setTimeout!
+
+## What This Explains
+
+**Why setTimeout(fn, 0) isn't immediate**: It goes to the queue and waits for the call stack to clear.
+
+**Why promises execute before setTimeout**: Microtask queue has priority.
+
+**Why blocking code freezes the browser**: The call stack is busy, event loop can't process other events.
+
+## Practical Understanding
+
+This knowledge helps me:
+- Debug async code
+- Understand promise execution order
+- Avoid blocking the main thread
+- Write better async code
+
+Understanding the event loop is making async JavaScript less mysterious.

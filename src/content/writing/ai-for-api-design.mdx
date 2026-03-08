@@ -1,0 +1,33 @@
+---
+title: "Using AI to Improve API Design"
+description: "Practical ways to leverage AI for contracts, error models, and documentation while keeping human judgment in charge."
+publishDate: 2024-08-22
+tags:
+  - "ai"
+  - "api-design"
+  - "documentation"
+  - "architecture"
+draft: false
+---
+
+API design is about contracts and clarity. AI can help you iterate faster when you provide the right context. In my experience, starting with a solid understanding of the domain prevents AI from generating generic or incorrect suggestions. By providing detailed context upfront, you guide the AI to produce more relevant and accurate outputs.
+
+## Context First
+
+- Domain overview and constraints: Begin by describing the business domain, user needs, and any technical constraints like performance requirements or regulatory compliance. This helps AI understand the 'why' behind your API.
+- Request/response shapes and examples: Provide sample JSON structures for requests and responses. Include edge cases and typical data flows to give AI concrete examples to build upon.
+- Error taxonomy and retry/backoff policies: Define your error categories (e.g., client errors, server errors) and how clients should handle retries. AI can then suggest appropriate HTTP status codes and error response formats.
+
+## What AI Helps With
+
+- Proposing consistent response formats: AI can analyze your existing endpoints and suggest standardized formats for pagination, filtering, and metadata, ensuring a cohesive API experience.
+- Drafting error models and status codes: When you describe error scenarios, AI can propose detailed error schemas with fields like error code, message, and hints for resolution.
+- Generating docs pages from source of truth: By feeding AI your OpenAPI specs or code comments, it can generate comprehensive documentation, including examples and use cases.
+
+## Validation Loop
+
+- Run examples against mock servers: Use tools like Postman or WireMock to test AI-generated examples. This catches issues early.
+- Check consistency across endpoints: Review for uniform naming conventions, data types, and error handling patterns.
+- Review with stakeholders and adjust: Share drafts with product managers and developers. Incorporate feedback to refine the design.
+
+Ultimately, AI is a tool to accelerate your workflow, but the final API design should reflect your team's expertise and business needs.

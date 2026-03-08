@@ -1,0 +1,144 @@
+---
+title: "Really Understanding Promises"
+description: "I thought I understood promises, but I'm learning there's more depth to them. Promise chaining, error handling, and Promise methods are clicking now."
+publishDate: 2022-09-14
+tags:
+  - "javascript"
+  - "async"
+  - "promises"
+draft: false
+---
+
+I've been using promises for a while, but I'm just now really understanding how they work.
+
+## What I Thought I Knew
+
+I thought promises were just:
+```javascript
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```
+
+That's the basics, but there's more.
+
+## Promise States
+
+A promise can be in three states:
+- **Pending**: Not finished yet
+- **Fulfilled**: Completed successfully
+- **Rejected**: Failed with an error
+
+Once a promise is fulfilled or rejected, it can't change.
+
+## Creating Promises
+
+I'm learning to create my own promises:
+
+```javascript
+function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`Waited ${ms}ms`);
+    }, ms);
+  });
+}
+
+delay(1000).then(message => console.log(message));
+```
+
+## Promise Chaining
+
+Chaining is powerful when you understand it:
+
+```javascript
+fetch('/api/user')
+  .then(response => {
+    if (!response.ok) throw new Error('Failed');
+    return response.json();
+  })
+  .then(user => {
+    console.log(user);
+    return fetch(`/api/posts?userId=${user.id}`);
+  })
+  .then(response => response.json())
+  .then(posts => console.log(posts))
+  .catch(error => console.error(error));
+```
+
+Each `.then()` returns a new promise.
+
+## Error Handling
+
+I'm learning proper error handling:
+
+```javascript
+promise
+  .then(result => {
+    // Handle success
+  })
+  .catch(error => {
+    // Handle any error in the chain
+  })
+  .finally(() => {
+    // Always runs, success or failure
+  });
+```
+
+## Promise Methods
+
+**Promise.all()**: Wait for all promises:
+```javascript
+const [users, posts, comments] = await Promise.all([
+  fetchUsers(),
+  fetchPosts(),
+  fetchComments()
+]);
+```
+
+**Promise.race()**: First one to finish wins:
+```javascript
+const result = await Promise.race([
+  fetchFromAPI1(),
+  fetchFromAPI2()
+]);
+```
+
+**Promise.allSettled()**: Wait for all, even if some fail:
+```javascript
+const results = await Promise.allSettled([
+  promise1,
+  promise2,
+  promise3
+]);
+```
+
+## Common Mistakes
+
+**Forgetting to return**: Breaking the chain:
+```javascript
+// Bad
+promise.then(result => {
+  doSomething(result); // Not returning!
+}).then(result => {
+  // result is undefined
+});
+
+// Good
+promise.then(result => {
+  return doSomething(result);
+}).then(result => {
+  // result has the value
+});
+```
+
+**Not catching errors**: Unhandled promise rejections.
+
+**Nesting promises**: Creating callback hell with promises.
+
+## What's Clicking
+
+Promises are about managing asynchronous operations in a clean way. They're not magic they're just objects that represent future values.
+
+Understanding promises deeply is making async/await make more sense too, since async/await is built on promises.

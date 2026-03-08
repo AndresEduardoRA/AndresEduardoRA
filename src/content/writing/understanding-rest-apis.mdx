@@ -1,0 +1,229 @@
+---
+title: "Understanding REST API Design"
+description: "I'm learning how to design good REST APIs. It's more than just making endpoints there are patterns and best practices I'm discovering."
+publishDate: 2022-07-30
+tags:
+  - "api"
+  - "rest"
+  - "backend"
+  - "design"
+draft: false
+---
+
+I've been building APIs for a while, but I'm just now learning about REST principles and API design patterns.
+
+Turns out there's more to it than just creating endpoints.
+
+## What I Thought REST Was
+
+At first, I thought REST just meant:
+- Use HTTP methods (GET, POST, PUT, DELETE)
+- Return JSON
+- Have URLs like `/api/users`
+
+That's part of it, but there's more.
+
+## REST Principles I'm Learning
+
+**Resources, not actions**: URLs should represent resources, not actions.
+
+Bad:
+```
+POST /api/createUser
+GET /api/getUser/123
+POST /api/deleteUser/123
+```
+
+Good:
+```
+POST /api/users
+GET /api/users/123
+DELETE /api/users/123
+```
+
+**Use HTTP methods correctly**:
+- GET: Retrieve data (should be safe and idempotent)
+- POST: Create new resources
+- PUT: Update entire resource
+- PATCH: Update part of resource
+- DELETE: Remove resource
+
+**Status codes matter**:
+- 200: Success
+- 201: Created
+- 400: Bad request
+- 401: Unauthorized
+- 404: Not found
+- 500: Server error
+
+I'm learning to use the right status code for each situation.
+
+## URL Structure
+
+I'm learning patterns for URL design:
+
+**Collections and items**:
+```
+GET /api/users          # Get all users
+GET /api/users/123      # Get specific user
+POST /api/users         # Create user
+PUT /api/users/123      # Update user
+DELETE /api/users/123   # Delete user
+```
+
+**Nested resources**:
+```
+GET /api/users/123/posts        # Get user's posts
+POST /api/users/123/posts       # Create post for user
+GET /api/users/123/posts/456    # Get specific post
+```
+
+**Query parameters for filtering**:
+```
+GET /api/users?role=admin
+GET /api/posts?author=123&status=published
+GET /api/products?page=2&limit=20
+```
+
+## Request and Response Format
+
+I'm standardizing my API responses:
+
+**Success response**:
+```javascript
+{
+  success: true,
+  data: {
+    id: 123,
+    name: "John Doe"
+  }
+}
+```
+
+**Error response**:
+```javascript
+{
+  success: false,
+  error: {
+    message: "User not found",
+    code: "USER_NOT_FOUND"
+  }
+}
+```
+
+**List response with pagination**:
+```javascript
+{
+  success: true,
+  data: [...],
+  pagination: {
+    page: 1,
+    limit: 20,
+    total: 100
+  }
+}
+```
+
+## Validation
+
+I'm learning to validate requests properly:
+
+```javascript
+app.post('/api/users', async (req, res) => {
+  const { name, email, password } = req.body;
+  
+  // Validate
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      success: false,
+      error: { message: "Missing required fields" }
+    });
+  }
+  
+  if (!isValidEmail(email)) {
+    return res.status(400).json({
+      success: false,
+      error: { message: "Invalid email format" }
+    });
+  }
+  
+  // Create user...
+});
+```
+
+## Error Handling
+
+I'm implementing consistent error handling:
+
+```javascript
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  
+  res.status(err.status || 500).json({
+    success: false,
+    error: {
+      message: err.message || "Internal server error"
+    }
+  });
+});
+```
+
+## What I'm Still Learning
+
+**Versioning**: How to version APIs (`/api/v1/users` vs `/api/v2/users`)
+
+**Authentication**: Where to put auth tokens (headers vs cookies)
+
+**Rate limiting**: Preventing abuse of my API
+
+**Documentation**: How to document APIs properly (I've heard about Swagger)
+
+**HATEOAS**: Hypermedia as the Engine of Application State (sounds complex)
+
+## Common Mistakes I'm Making
+
+**Inconsistent naming**: Sometimes I use camelCase, sometimes snake_case. I need to pick one.
+
+**Not handling errors properly**: My API crashes instead of returning proper error responses.
+
+**Missing validation**: I'm not validating all inputs, leading to bad data in my database.
+
+**No pagination**: Returning all records instead of paginating large lists.
+
+## Tools I'm Using
+
+**Postman**: For testing API endpoints
+
+**Thunder Client**: VS Code extension for API testing
+
+**Express**: For building the API
+
+**Joi**: For request validation (just started learning this)
+
+## What I'm Building
+
+To practice API design, I'm building:
+- A blog API with posts, comments, and users
+- A todo API with proper CRUD operations
+- An e-commerce API with products and orders
+
+## My Current Understanding
+
+Good API design is about:
+- Consistency
+- Predictability
+- Proper use of HTTP
+- Clear error messages
+- Good documentation
+
+It's not just about making it work it's about making it easy to use and maintain.
+
+## Resources Helping Me
+
+- REST API tutorial on YouTube
+- Express documentation
+- Reading other APIs (GitHub, Twitter)
+- Building and testing my own APIs
+
+I'm realizing that API design is a skill that takes practice. My first APIs were messy, but I'm getting better at designing clean, consistent APIs.

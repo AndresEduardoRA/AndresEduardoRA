@@ -1,0 +1,103 @@
+---
+title: "Starting to Learn TypeScript"
+description: "I'm beginning to learn TypeScript and it's changing how I write JavaScript. The type system is confusing but I'm seeing the benefits."
+publishDate: 2023-02-20
+tags:
+  - "typescript"
+  - "javascript"
+  - "learning"
+draft: false
+---
+
+I'm starting to learn TypeScript, and it's both confusing and exciting.
+
+## Why I'm Learning TypeScript
+
+I keep running into bugs that TypeScript would catch:
+- Typos in property names
+- Passing wrong types to functions
+- Undefined errors that could be prevented
+
+I'm tired of finding these bugs at runtime.
+
+## First Impressions
+
+**JSX feels weird**: Writing types in my JavaScript feels strange at first.
+
+**The compiler is strict**: It catches so many errors I didn't know I was making.
+
+**Setup is confusing**: tsconfig.json has so many options.
+
+## Basic Types I'm Learning
+
+```typescript
+// Primitives
+let name: string = "John";
+let age: number = 25;
+let isActive: boolean = true;
+
+// Arrays
+let numbers: number[] = [1, 2, 3];
+let names: Array<string> = ["John", "Jane"];
+
+// Objects
+let user: { name: string; age: number } = {
+  name: "John",
+  age: 25
+};
+
+// Functions
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+```
+
+## Interfaces
+
+Interfaces help me define object shapes:
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  age?: number; // Optional property
+}
+
+const user: User = {
+  id: 1,
+  name: "John",
+  email: "john@example.com"
+};
+```
+
+## What's Confusing
+
+**Type inference**: Sometimes TypeScript knows the type, sometimes I need to specify it.
+
+**Any type**: I'm using `any` too much because I don't know the proper type.
+
+**Generics**: I see them everywhere but don't understand them yet.
+
+**Type vs Interface**: When do I use which?
+
+## Mistakes I'm Making
+
+**Using any everywhere**: This defeats the purpose of TypeScript.
+
+**Fighting the compiler**: When I get errors, I'm tempted to use `any` instead of fixing the types.
+
+**Not reading error messages**: TypeScript errors are verbose but helpful.
+
+## What I'm Noticing
+
+My editor (VS Code) is much more helpful now:
+- Better autocomplete
+- Catches errors as I type
+- Shows function signatures
+
+## My Plan
+
+I'm converting one of my JavaScript projects to TypeScript to practice. It's slow, but I'm learning a lot.
+
+TypeScript feels like it will make me a better developer, even if it's frustrating right now.

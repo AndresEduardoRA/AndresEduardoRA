@@ -1,0 +1,133 @@
+---
+title: "React Hooks Are Confusing But Powerful"
+description: "I'm diving deeper into React Hooks and they're starting to make sense. Here's what I'm learning about useState, useEffect, and custom hooks."
+publishDate: 2022-01-15
+tags:
+  - "react"
+  - "hooks"
+  - "javascript"
+draft: false
+---
+
+I've been using React for a few months now, and I'm finally starting to understand hooks properly.
+
+At first, hooks seemed like magic. Now I'm seeing why they're so powerful.
+
+## What I'm Learning About useState
+
+`useState` is the hook I use most. It's for managing component state:
+
+```javascript
+const [count, setCount] = useState(0);
+```
+
+What I'm realizing:
+- State updates are asynchronous
+- You can't just do `count++`, you need `setCount(count + 1)`
+- If you need the previous state, use a function: `setCount(prev => prev + 1)`
+
+## useEffect Is Tricky
+
+`useEffect` is the hook that's confusing me the most right now.
+
+It runs after render, and you can use it for:
+- Fetching data
+- Setting up subscriptions
+- Manually changing the DOM
+
+The dependency array is what trips me up:
+
+```javascript
+useEffect(() => {
+  // This runs on every render
+});
+
+useEffect(() => {
+  // This runs once on mount
+}, []);
+
+useEffect(() => {
+  // This runs when 'count' changes
+}, [count]);
+```
+
+I keep forgetting dependencies and getting infinite loops or stale data.
+
+## Custom Hooks Are Cool
+
+I just learned you can create your own hooks. This is powerful:
+
+```javascript
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading };
+}
+```
+
+Now I can reuse this logic across components!
+
+## Common Mistakes I'm Making
+
+**Forgetting dependencies**: My useEffect doesn't update when it should because I forgot to add dependencies.
+
+**Too many useState calls**: I'm learning to group related state into objects.
+
+**Not cleaning up effects**: I need to return cleanup functions from useEffect for subscriptions.
+
+**Calling hooks conditionally**: Hooks must be called in the same order every render. No conditionals!
+
+## What I'm Building
+
+To practice hooks, I'm building:
+- A todo app with local storage persistence
+- A weather app that fetches data
+- A timer component with useEffect
+- Custom hooks for common patterns
+
+## What's Clicking
+
+**Hooks are just functions**: They're not magic, they're just JavaScript functions with special rules.
+
+**Composition over inheritance**: Hooks let you reuse logic without complex component hierarchies.
+
+**Simpler than class components**: No more `this` binding issues or lifecycle method confusion.
+
+## What I'm Still Confused About
+
+- useCallback and useMemo (when do I actually need these?)
+- useRef (I know it's for DOM access, but what else?)
+- useReducer (seems like overkill for simple state?)
+- Rules of hooks (why can't I call them conditionally?)
+
+## Resources I'm Using
+
+- React docs (the new beta docs are really good)
+- YouTube tutorials
+- Building projects (the best way to learn)
+
+## My Advice Right Now
+
+If you're learning hooks:
+
+**Start with useState**: Get comfortable with basic state management first.
+
+**Practice useEffect**: Build projects that fetch data and handle side effects.
+
+**Don't rush to custom hooks**: Learn the built-in hooks well first.
+
+**Read the rules**: Understanding why hooks have rules helps you avoid bugs.
+
+**Build things**: Reading about hooks doesn't help as much as using them.
+
+Hooks are starting to feel natural. I'm excited to keep learning and building with them.

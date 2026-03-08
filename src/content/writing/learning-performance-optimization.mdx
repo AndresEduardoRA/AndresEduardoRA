@@ -1,0 +1,88 @@
+---
+title: "Learning About Web Performance"
+description: "I'm starting to learn about web performance optimization. Fast websites aren't just nice they're essential."
+publishDate: 2023-03-30
+tags:
+  - "performance"
+  - "optimization"
+  - "web"
+draft: false
+---
+
+I'm learning about web performance, and I'm realizing my sites could be much faster.
+
+## Why Performance Matters
+
+- Users leave slow sites
+- Google ranks fast sites higher
+- Better user experience
+- Lower server costs
+
+## What I'm Measuring
+
+**Chrome DevTools**:
+- Lighthouse scores
+- Network tab
+- Performance tab
+
+**Core Web Vitals**:
+- LCP (Largest Contentful Paint): Loading performance
+- FID (First Input Delay): Interactivity
+- CLS (Cumulative Layout Shift): Visual stability
+
+## Quick Wins I'm Implementing
+
+**Optimize images**:
+- Use WebP format
+- Compress images
+- Lazy load images
+- Use appropriate sizes
+
+**Minify code**:
+- Minify JavaScript and CSS
+- Remove unused code
+- Use production builds
+
+**Use CDN**:
+- Serve static assets from CDN
+- Reduce server load
+- Faster delivery
+
+**Enable caching**:
+- Cache static assets
+- Use service workers
+- Set proper cache headers
+
+## React Performance
+
+**Avoid unnecessary re-renders**:
+```javascript
+const MemoizedComponent = React.memo(MyComponent);
+```
+
+**Use useMemo and useCallback**:
+```javascript
+const expensiveValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+const memoizedCallback = useCallback(() => doSomething(a, b), [a, b]);
+```
+
+**Code splitting**:
+```javascript
+const LazyComponent = React.lazy(() => import('./Component'));
+```
+
+## What I'm Learning
+
+**Measure first**: Don't optimize blindly.
+
+**Focus on bottlenecks**: Fix the slowest parts first.
+
+**Balance**: Perfect performance vs development time.
+
+**Progressive enhancement**: Start with fast basics, add features carefully.
+
+## Current Understanding
+
+Performance is about user experience. Fast sites feel better to use.
+
+I'm learning to think about performance from the start, not as an afterthought.

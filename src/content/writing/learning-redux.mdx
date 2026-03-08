@@ -1,0 +1,84 @@
+---
+title: "Learning Redux for State Management"
+description: "I'm learning Redux to manage state in larger React apps. It's complex but I'm starting to see when and why to use it."
+publishDate: 2023-10-15
+tags:
+  - "redux"
+  - "react"
+  - "state-management"
+draft: false
+---
+
+I'm learning Redux and it's one of the more complex things I've tackled in React.
+
+## Why Redux?
+
+For small apps, React's useState and Context API work fine. But I'm learning Redux for:
+- Managing complex state
+- State that many components need
+- Understanding a common industry pattern
+
+## Core Concepts
+
+**Store**: Single source of truth for state
+
+**Actions**: Objects describing what happened
+```javascript
+{ type: 'INCREMENT', payload: 1 }
+```
+
+**Reducers**: Functions that update state based on actions
+```javascript
+function counterReducer(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + action.payload;
+    case 'DECREMENT':
+      return state - action.payload;
+    default:
+      return state;
+  }
+}
+```
+
+**Dispatch**: Send actions to the store
+
+## What's Confusing
+
+**Boilerplate**: So much code for simple things!
+
+**Immutability**: I have to return new objects, not mutate state.
+
+**Async actions**: Redux Thunk or Redux Saga for async operations.
+
+**When to use it**: Not every app needs Redux.
+
+## Redux Toolkit
+
+I'm learning Redux Toolkit, which simplifies Redux:
+
+```javascript
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {
+    increment: (state, action) => state + action.payload,
+    decrement: (state, action) => state - action.payload
+  }
+});
+```
+
+Much less boilerplate!
+
+## Current Understanding
+
+Redux is powerful for complex state, but it's overkill for simple apps.
+
+I'm learning when to use:
+- useState: Component-local state
+- Context: Shared state, not updated often
+- Redux: Complex state, frequent updates, many components
+
+Still learning, but Redux is starting to make sense.

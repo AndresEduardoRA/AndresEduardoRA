@@ -1,0 +1,137 @@
+---
+title: "Learning CSS is Harder Than I Thought"
+description: "I thought CSS would be easy just styling, right? Wrong. Here's what I'm learning about making websites look good."
+publishDate: 2021-06-08
+tags:
+  - "css"
+  - "web-development"
+  - "learning"
+draft: false
+---
+
+I've been learning JavaScript and felt pretty good about my progress. Then I tried to make my projects look decent, and I realized: CSS is hard.
+
+## The Misconception
+
+I thought CSS would be easy. It's just styling, right? Change some colors, adjust some sizes, done.
+
+But making a website actually look good and work on different screen sizes? That's a whole different challenge.
+
+## What I'm Struggling With
+
+**Centering things**: Why are there so many ways to center a div? And why do some work in some situations but not others?
+
+**Responsive design**: My website looks fine on my laptop, then I check it on my phone and everything is broken.
+
+**Specificity**: Sometimes my CSS doesn't apply and I don't know why. Turns out there's this whole specificity system that determines which styles win.
+
+**Flexbox vs Grid**: I've heard both are important for layouts, but I don't know when to use which one.
+
+**Positioning**: `relative`, `absolute`, `fixed`, `sticky` I'm still confused about when to use each one.
+
+## What's Helping
+
+**Building projects**: I learn more from trying to style one project than from reading tutorials.
+
+**DevTools**: The browser's inspect element tool is amazing. I can see what styles are applied and experiment with changes.
+
+**CSS Tricks**: This website has been super helpful for understanding specific concepts.
+
+**Flexbox Froggy and Grid Garden**: These games made learning flexbox and grid actually fun.
+
+## Small Wins
+
+**I can center things now**: Using flexbox makes centering so much easier:
+
+```css
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+**I understand the box model**: Everything is a box. Margin, border, padding, content. This concept helped a lot.
+
+**I'm using CSS variables**: Instead of repeating colors everywhere, I can define them once:
+
+```css
+:root {
+  --primary-color: #3498db;
+  --text-color: #333;
+}
+```
+
+**Media queries make sense**: I can change styles based on screen size:
+
+```css
+@media (max-width: 768px) {
+  /* Styles for mobile */
+}
+```
+
+## What I'm Learning
+
+**Start with mobile**: It's easier to design for mobile first, then add styles for larger screens.
+
+**Use flexbox for one-dimensional layouts**: When you're arranging items in a row or column.
+
+**Use grid for two-dimensional layouts**: When you need both rows and columns.
+
+**Keep it simple**: I tried to make everything fancy and it looked terrible. Simple designs often look better.
+
+**Consistency matters**: Using the same spacing, colors, and fonts throughout makes a site look more professional.
+
+## Resources I'm Using
+
+- **MDN CSS documentation**: For reference
+- **CSS Tricks**: For tutorials and guides
+- **Flexbox Froggy**: Game for learning flexbox
+- **Grid Garden**: Game for learning CSS Grid
+- **YouTube tutorials**: Watching someone style a website helps me understand
+
+## Common Mistakes
+
+**Using too many colors**: I tried to use every color I liked. It looked chaotic. Now I stick to 2-3 main colors.
+
+**Inconsistent spacing**: Random margins and padding everywhere. Now I use a spacing system (multiples of 8px).
+
+**Not testing on mobile**: I would finish styling, then check mobile and everything was broken.
+
+**Fighting with CSS**: When something didn't work, I would add more CSS to fix it, making it worse. Sometimes the solution is to remove CSS, not add more.
+
+## What I'm Building
+
+To practice CSS, I'm rebuilding websites I like:
+
+- Copying the layout of simple landing pages
+- Recreating navigation menus
+- Building card components
+- Making responsive grids
+
+I'm not trying to make exact copies, just practicing the layouts and techniques.
+
+## What's Next
+
+I want to learn:
+
+- CSS animations and transitions
+- More advanced grid techniques
+- How to organize CSS better (I've heard about methodologies like BEM)
+- Maybe try a CSS framework like Tailwind or Bootstrap
+
+## Advice for Beginners
+
+**Don't skip CSS**: I was tempted to just use a framework and skip learning CSS properly. But understanding CSS makes everything easier.
+
+**Use DevTools constantly**: Inspect elements, try changes, see what works.
+
+**Build things**: Reading about CSS doesn't help as much as actually styling projects.
+
+**Start simple**: Don't try to build a complex layout right away. Build simple components first.
+
+**It's okay to look things up**: I still Google "how to center a div" sometimes. That's normal.
+
+CSS is harder than I expected, but it's also more powerful. I'm starting to see how good design makes a huge difference in how people perceive a website.
+
+Still learning, still struggling sometimes, but making progress.

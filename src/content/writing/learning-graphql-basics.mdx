@@ -1,0 +1,112 @@
+---
+title: "Exploring GraphQL as an Alternative to REST"
+description: "I'm learning GraphQL and seeing how it's different from REST APIs. It's a different way of thinking about data fetching."
+publishDate: 2023-12-05
+tags:
+  - "graphql"
+  - "api"
+  - "backend"
+draft: false
+---
+
+I'm exploring GraphQL as an alternative to REST APIs. It's a completely different approach to building APIs.
+
+## What Is GraphQL?
+
+GraphQL is a query language for APIs. Instead of multiple endpoints, you have one endpoint and clients specify exactly what data they need.
+
+## REST vs GraphQL
+
+**REST**:
+```
+GET /users/1
+GET /users/1/posts
+GET /users/1/comments
+```
+
+**GraphQL**:
+```graphql
+query {
+  user(id: 1) {
+    name
+    email
+    posts {
+      title
+      content
+    }
+    comments {
+      text
+    }
+  }
+}
+```
+
+One request, exactly the data you need.
+
+## Basic GraphQL Server
+
+Using Apollo Server:
+
+```javascript
+const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql`
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+  }
+  
+  type Query {
+    users: [User]
+    user(id: ID!): User
+  }
+`;
+
+const resolvers = {
+  Query: {
+    users: () => getAllUsers(),
+    user: (parent, { id }) => getUserById(id)
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+```
+
+## What I'm Learning
+
+**Schema-first**: Define your data structure with types.
+
+**Resolvers**: Functions that fetch the data.
+
+**Queries**: Read data.
+
+**Mutations**: Modify data.
+
+**Subscriptions**: Real-time updates.
+
+## What's Different
+
+**No over-fetching**: Get exactly what you ask for.
+
+**No under-fetching**: Get everything in one request.
+
+**Strongly typed**: Schema defines what's possible.
+
+**Self-documenting**: Schema is the documentation.
+
+## What's Challenging
+
+**Learning curve**: New concepts and syntax.
+
+**Caching**: More complex than REST.
+
+**File uploads**: Not as straightforward as REST.
+
+**When to use it**: Not every project needs GraphQL.
+
+## Current Thoughts
+
+GraphQL is powerful for complex data requirements. But REST is simpler for simple APIs.
+
+I'm learning both so I can choose the right tool for each project.

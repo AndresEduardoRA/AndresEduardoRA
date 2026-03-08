@@ -1,0 +1,136 @@
+---
+title: "Learning SQL After Using MongoDB"
+description: "I'm learning SQL databases after using MongoDB for a year. It's different but I'm seeing why SQL is still so popular."
+publishDate: 2023-07-18
+tags:
+  - "sql"
+  - "databases"
+  - "postgresql"
+draft: false
+---
+
+After using MongoDB for over a year, I'm now learning SQL databases (specifically PostgreSQL).
+
+## Why I'm Learning SQL
+
+- Most companies use SQL databases
+- Some data fits better in relational databases
+- SQL is a fundamental skill
+- I want to understand when to use SQL vs NoSQL
+
+## First Impressions
+
+**Tables feel rigid**: Coming from MongoDB's flexible documents, SQL tables feel strict.
+
+**Relationships are explicit**: Foreign keys and joins are built into the design.
+
+**SQL syntax is different**: It's not JavaScript, it's its own language.
+
+## Basic SQL I'm Learning
+
+**Creating tables**:
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+**Inserting data**:
+```sql
+INSERT INTO users (name, email)
+VALUES ('John Doe', 'john@example.com');
+```
+
+**Querying data**:
+```sql
+SELECT * FROM users WHERE email = 'john@example.com';
+```
+
+**Updating data**:
+```sql
+UPDATE users SET name = 'Jane Doe' WHERE id = 1;
+```
+
+**Deleting data**:
+```sql
+DELETE FROM users WHERE id = 1;
+```
+
+## Understanding Relationships
+
+**One-to-many**:
+```sql
+CREATE TABLE posts (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200),
+  user_id INTEGER REFERENCES users(id)
+);
+```
+
+**Joins**:
+```sql
+SELECT users.name, posts.title
+FROM users
+JOIN posts ON users.id = posts.user_id;
+```
+
+## What's Different from MongoDB
+
+**Schema is required**: I have to define the structure upfront.
+
+**Relationships are explicit**: Foreign keys enforce data integrity.
+
+**Joins are powerful**: Combining data from multiple tables is built-in.
+
+**Transactions**: ACID properties ensure data consistency.
+
+## What I'm Struggling With
+
+**Complex joins**: Joining multiple tables gets confusing.
+
+**Normalization**: Understanding when to split data into multiple tables.
+
+**SQL syntax**: It's verbose compared to MongoDB queries.
+
+**Migrations**: Changing the schema in production is tricky.
+
+## When to Use SQL vs MongoDB
+
+I'm learning:
+
+**Use SQL when**:
+- Data has clear relationships
+- Data integrity is crucial
+- Complex queries are common
+- Schema is stable
+
+**Use MongoDB when**:
+- Schema is flexible or evolving
+- Data is hierarchical
+- Rapid prototyping
+- Horizontal scaling is needed
+
+## What I'm Building
+
+To practice SQL, I'm building:
+- A blog with users, posts, and comments
+- An e-commerce database with products, orders, and customers
+- Converting some MongoDB projects to PostgreSQL
+
+## Resources I'm Using
+
+- PostgreSQL documentation
+- SQL tutorials on YouTube
+- SQLBolt (interactive SQL tutorial)
+- Building projects
+
+## Current Understanding
+
+SQL databases aren't "old" or "outdated" they're still the best choice for many applications.
+
+MongoDB and SQL solve different problems. Understanding both makes me a better developer.
+
+I'm glad I'm learning SQL. It's opening my eyes to different ways of thinking about data.
