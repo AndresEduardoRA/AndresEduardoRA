@@ -10,6 +10,8 @@
     "professional"
   ],
   "author": "Andres - Niuvu <andres.ra@niuvu.com>",
+  "private": true,
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/AndresEduardoRA/AndresEduardoRA.git"

@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="90" src="https://me.niuvu.com/favicon.png">
+  <img height="90" src="./public/favicon.png">
 </p>
 
 ## Andrés Alpiri
@@ -14,7 +14,7 @@ Currently finishing my Computer Engineering degree and continuously learning new
 
 ### 📫 How to reach me:
 
-- Website: https://me.niuvu.com
+- Website: <a href="https://me.niuvu.com" target="_blank" rel="noopener noreferrer">https://me.niuvu.com</a>
 - Email: andres.ra@niuvu.com
 
 You can also explore my work and projects on this GitHub profile.
