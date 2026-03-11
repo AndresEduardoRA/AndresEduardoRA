@@ -1,0 +1,159 @@
+---
+title: "QRaten — Offline QR Attendance System (Archived)"
+role: "Full-Stack Engineer / Sole Developer"
+year: 2024
+duration: "Iterative dev (late 2024 - late 2025)"
+teamSize: 4
+outcomeSummary: "Functional product with landing page in production. Implemented a TOTP-based QR system enabling offline attendance registration; project archived while preparing a PWA rewrite."
+
+overview: "QRaten is an attendance tracking application based on QR codes designed to work even without an internet connection using TOTP-style codes. It originated from a real classroom problem: quickly registering attendance for large classes without relying on connectivity. I built the entire application end‑to‑end, leading architecture, development, infrastructure, and product decisions while collaborating with two designers for the UI and dashboard."
+
+problem: "Professors with large classes (90+ students) lose significant time manually taking attendance. Existing solutions mostly behave like spreadsheets and require internet connectivity. None provided a reliable offline-first system capable of registering attendance instantly during class while keeping infrastructure costs low."
+
+constraints:
+  - "Attendance registration needed to work without internet connectivity for both professor and students."
+  - "Infrastructure costs had to remain extremely low to make the product viable for universities."
+  - "The UX needed to be simple enough for non‑technical users."
+  - "Initial business requirement included distribution through app stores (Play Store / App Store / Microsoft Store)."
+
+approach: "I iterated through several architectural designs to find the right balance between reliability, cost, and scalability. Early versions used traditional client‑server validation with caching layers, but infrastructure costs were too high. Eventually I redesigned the core mechanism around TOTP-based QR codes, allowing validation to happen primarily on the client side. This drastically reduced server load and removed the need for Redis. In the final iteration I moved the backend toward Supabase and began planning a PWA rewrite to simplify distribution and avoid regional payment infrastructure limitations."
+
+versions:
+  - version: "v1 — Client/Server Prototype"
+    period: "Late 2024"
+    keyChanges: "Backend with Nest.js and PostgreSQL, mobile client with React Native. QR validation required internet connectivity."
+  - version: "v2 — Redis Caching Layer"
+    period: "Early 2025"
+    keyChanges: "Added Redis and local storage to tolerate partial offline operation; however infrastructure costs increased significantly."
+  - version: "v3 — Flutter Rewrite"
+    period: "Mid 2025"
+    keyChanges: "Rebuilt the mobile client using Flutter for better stability, faster iteration, and improved UI implementation."
+  - version: "v4 — TOTP Architecture"
+    period: "Late 2025"
+    keyChanges: "Replaced Redis with a TOTP algorithm allowing QR generation and validation directly on the client. Backend migrated to Supabase for authentication and data management."
+  - version: "v5 — Manual Subscription System"
+    period: "Late 2025 — archived"
+    keyChanges: "Built a super‑admin dashboard to manage subscriptions manually due to Stripe being unavailable in Bolivia. The project was paused afterwards and scheduled for a PWA redesign."
+
+keyDecisions:
+  - decision: "Adopt TOTP for offline QR validation"
+    reasoning: "Using TOTP allows QR codes to be validated on the client or with minimal backend verification. This drastically reduces server calls and infrastructure requirements, making the product commercially viable for universities."
+    alternatives:
+      - "Centralized validation using Redis"
+      - "Fully online validation"
+
+  - decision: "Rewrite the mobile client in Flutter"
+    reasoning: "React Native introduced friction due to frequent updates and breaking changes. Flutter provided more stability and built‑in UI components, which accelerated development."
+    alternatives:
+      - "Continue with React Native"
+      - "Build fully native apps for each platform"
+
+  - decision: "Adopt Supabase and move toward a PWA strategy"
+    reasoning: "Supabase provided authentication, row-level security, and realtime capabilities out of the box. A PWA reduces distribution friction and allows faster MVP deployment without relying on mobile app stores."
+    alternatives:
+      - "Self‑hosted Docker infrastructure on DigitalOcean"
+      - "Firebase-based backend"
+
+techStack:
+  - "Mobile Frontend: Flutter"
+  - "Archived Mobile: React Native"
+  - "Backend: Nest.js (early versions), Supabase (final iteration)"
+  - "Database: PostgreSQL"
+  - "Hosting: Vercel (landing), DigitalOcean (prototypes), Supabase Edge Functions"
+  - "Authentication: OAuth (Google), Magic Links, Email/Password"
+
+productFeatures:
+core:
+  - "QR attendance registration (online and offline via TOTP) — KILLER FEATURE"
+  - "Course and subcourse management"
+  - "Role system (super admin, director, professor, assistant, student, substitute)"
+  - "Invitation-based enrollment via links"
+  - "Administrative dashboard with reporting and exports"
+secondary:
+  - "Manual attendance registration"
+  - "Realtime notifications when students register attendance"
+
+impact:
+  metrics:
+    - label: "Play Store downloads"
+      value: "~30 downloads during limited release"
+    - label: "Production usage"
+      value: "No large-scale deployment — product remained in negotiation/demo stage"
+
+  qualitative: "Demonstrated a technically viable solution for offline QR attendance systems and validated interest with institutional stakeholders."
+
+whatWentWrong:
+  - "Initial architecture optimized too early for scalability using Redis, increasing infrastructure complexity and cost."
+  - "Stripe dependency for subscriptions failed due to regional availability restrictions in Bolivia."
+
+learnings:
+  - "For early-stage products, minimizing distribution friction (for example via PWA) is often more valuable than native apps."
+  - "Infrastructure decisions should prioritize cost predictability before extreme scalability."
+  - "Payment infrastructure compatibility with the local market must be validated early."
+
+recommendations:
+security:
+  - "Use OAuth + Magic Links with optional MFA for administrators."
+  - "Protect sensitive data with TLS encryption and row‑level security policies."
+  - "Maintain audit logs for administrative actions."
+pwa:
+  - "Cache First strategy for static assets (app shell)."
+  - "Network First for critical dynamic data."
+  - "Stale‑While‑Revalidate for lists and non‑critical resources."
+  - "Background Sync API to retry attendance submissions when connection is restored."
+  - "Firebase Cloud Messaging for push notifications on Android."
+  - "Aim to pass Lighthouse PWA audits with scores above 90."
+
+recruiterQA:
+  - "Most impactful technical decision": "Adopting TOTP-based QR validation drastically reduced infrastructure requirements and made large-scale attendance registration feasible at low cost."
+  - "Most significant mistake": "Choosing Redis too early for scalability; later corrected by redesigning the architecture around TOTP."
+  - "Trade-offs": "Skipped automated tests initially to iterate faster and reach a working demo for stakeholders."
+  - "Senior-level responsibility": "Full ownership of architecture, infrastructure, product direction, and coordination with design collaborators."
+
+timelineHighlights:
+  - "Initial idea and prototype — Late 2024"
+  - "Architecture experiments and Redis scaling tests — 2025"
+  - "Flutter rewrite and TOTP architecture — Late 2025"
+  - "Project archived and planned PWA redesign — 2026"
+
+frontmatterRecommendations:
+titleForFrontmatter: "QRaten — Offline QR Attendance (Archived)"
+shortSummary: "Offline-first attendance tracking system using TOTP QR codes designed for large university classrooms."
+tags:
+  - "PWA"
+  - "Flutter"
+  - "Supabase"
+  - "Offline-first"
+  - "QR"
+
+featured: true
+status: archived
+order: 2
+relatedDecisions:
+  - "totp-offline-qr"
+  - "pwa-strategy"
+---
+
+## Additional Context
+
+This archived version of QRaten represents a year of iterative development and architectural experimentation. Screenshots and UI designs (Figma) are included in the repository for visual reference.
+
+This document outlines the technical and product decisions behind the system, as well as the architectural approach taken during its development.
+
+Throughout the project, I collaborated closely with two product/UX designers on the UI and dashboard experience:
+
+- <a href="https://www.linkedin.com/in/mar%C3%ADa-de-los-angeles-gallardo-dise%C3%B1adora-ui-ux/" target="_blank" rel="noopener noreferrer">María de los Ángeles Gallardo</a>
+- <a href="https://www.linkedin.com/in/victoria-t-a6b498209/" target="_blank" rel="noopener noreferrer">Victoria Taquichiri Martinez</a>
+
+The archived source code and the current state of QRaten are available in the public repository:
+[Repositorio QRaten en GitHub](https://github.com/AndresEduardoRA/qraten-archived)
+
+## Next Steps (Planned)
+
+- Build a PWA MVP focused on offline attendance registration.
+- Implement a payment flow compatible with Bolivia.
+- Introduce automated tests and monitoring infrastructure.
+
+---
+
+\*Note:- Sensitive details about potential clients or negotiations have been intentionally omitted for confidentiality reasons.

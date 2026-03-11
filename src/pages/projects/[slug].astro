@@ -87,10 +87,22 @@ const {
   problem,
   constraints,
   approach,
+  versions,
   keyDecisions,
   techStack,
+  coreValue,
+  productFeatures, // deprecated
   impact,
+  challenges,
+  whatWentWrong, // deprecated
   learnings,
+  technicalDeepDive,
+  recommendations, // deprecated
+  engineeringLeadership,
+  recruiterQA, // deprecated
+  timelineHighlights,
+  collaborators,
+  projectLinks,
   relatedProjects,
   relatedDecisions,
   status,
@@ -115,11 +127,21 @@ const allText = [
   problem,
   approach,
   ...constraints,
+  ...(versions?.map((v) => `${v.version} ${v.keyChanges}`) || []),
   ...keyDecisions.map(
     (d) => `${d.decision} ${d.reasoning} ${d.alternatives?.join(" ") || ""}`,
   ),
+  ...(coreValue || []),
+  ...(productFeatures?.core || []),
+  ...(productFeatures?.secondary || []),
   impact.qualitative,
+  ...(challenges || whatWentWrong || []),
   ...learnings,
+  ...(technicalDeepDive?.security || recommendations?.security || []),
+  ...(technicalDeepDive?.performance || []),
+  ...(technicalDeepDive?.architecture || recommendations?.pwa || []),
+  ...(technicalDeepDive?.infrastructure || []),
+  ...(timelineHighlights || []),
   project.body || "",
 ].join(" ");
 const readingTime = formatReadingTime(calculateReadingTime(allText));
@@ -186,6 +208,84 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
       <p class="outcome-summary">{outcomeSummary}</p>
     </header>
 
+    <!-- Project Links Section (if available) -->
+    {
+      projectLinks && (projectLinks.live || projectLinks.github || projectLinks.archived || projectLinks.figma || projectLinks.demo) && (
+        <section class="project-links-section">
+          <div class="project-links">
+            {projectLinks.live && (
+              <a href={projectLinks.live} target="_blank" rel="noopener noreferrer" class="project-link">
+                <span class="link-icon">🌐</span>
+                <span class="link-text">Live Site</span>
+              </a>
+            )}
+            {projectLinks.github && (
+              <a href={projectLinks.github} target="_blank" rel="noopener noreferrer" class="project-link">
+                <span class="link-icon">💻</span>
+                <span class="link-text">GitHub</span>
+              </a>
+            )}
+            {projectLinks.archived && (
+              <a href={projectLinks.archived} target="_blank" rel="noopener noreferrer" class="project-link">
+                <span class="link-icon">📦</span>
+                <span class="link-text">Archived Code</span>
+              </a>
+            )}
+            {projectLinks.figma && (
+              <a href={projectLinks.figma} target="_blank" rel="noopener noreferrer" class="project-link">
+                <span class="link-icon">🎨</span>
+                <span class="link-text">Figma</span>
+              </a>
+            )}
+            {projectLinks.demo && (
+              <a href={projectLinks.demo} target="_blank" rel="noopener noreferrer" class="project-link">
+                <span class="link-icon">🎬</span>
+                <span class="link-text">Demo</span>
+              </a>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Collaborators Section (if available) -->
+    {
+      collaborators && collaborators.length > 0 && (
+        <section class="collaborators-section">
+          <h3 class="collaborators-title">Team</h3>
+          <div class="collaborators-grid">
+            {collaborators.map((collab) => (
+              <div class="collaborator-card">
+                <div class="collaborator-info">
+                  <p class="collaborator-name">{collab.name}</p>
+                  <p class="collaborator-role">{collab.role}</p>
+                </div>
+                {(collab.linkedin || collab.github || collab.website) && (
+                  <div class="collaborator-links">
+                    {collab.linkedin && (
+                      <a href={collab.linkedin} target="_blank" rel="noopener noreferrer" class="collaborator-link" title="LinkedIn">
+                        <span class="link-icon">in</span>
+                      </a>
+                    )}
+                    {collab.github && (
+                      <a href={collab.github} target="_blank" rel="noopener noreferrer" class="collaborator-link" title="GitHub">
+                        <span class="link-icon">gh</span>
+                      </a>
+                    )}
+                    {collab.website && (
+                      <a href={collab.website} target="_blank" rel="noopener noreferrer" class="collaborator-link" title="Website">
+                        <span class="link-icon">🌐</span>
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
     <!-- Overview Section -->
     <section class="case-study-section">
       <h2>Overview</h2>
@@ -211,6 +311,26 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
       <h2>Approach</h2>
       <p>{approach}</p>
     </section>
+
+    <!-- Versions Section (if available) -->
+    {
+      versions && versions.length > 0 && (
+        <section class="case-study-section">
+          <h2>Evolution</h2>
+          <div class="versions-timeline">
+            {versions.map((version) => (
+              <div class="version-item">
+                <div class="version-header">
+                  <h3 class="version-title">{version.version}</h3>
+                  <span class="version-period">{version.period}</span>
+                </div>
+                <p class="version-changes">{version.keyChanges}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
 
     <!-- Key Decisions Section -->
     <section class="case-study-section">
@@ -248,6 +368,49 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
       </ul>
     </section>
 
+    <!-- Core Value Section (if available) -->
+    {
+      coreValue && coreValue.length > 0 && (
+        <section class="case-study-section">
+          <h2>Core Value</h2>
+          <ul class="core-value-list">
+            {coreValue.map((value) => (
+              <li>{value}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- Product Features Section (if available) - DEPRECATED -->
+    {
+      !coreValue && productFeatures && (productFeatures.core || productFeatures.secondary) && (
+        <section class="case-study-section">
+          <h2>Product Features</h2>
+          {productFeatures.core && productFeatures.core.length > 0 && (
+            <div class="features-group">
+              <h3 class="features-subtitle">Core Features</h3>
+              <ul class="features-list">
+                {productFeatures.core.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {productFeatures.secondary && productFeatures.secondary.length > 0 && (
+            <div class="features-group">
+              <h3 class="features-subtitle">Secondary Features</h3>
+              <ul class="features-list">
+                {productFeatures.secondary.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )
+    }
+
     <!-- Result/Impact Section -->
     <section class="case-study-section">
       <h2>Result & Impact</h2>
@@ -269,6 +432,116 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
         {learnings.map((learning) => <li>{learning}</li>)}
       </ul>
     </section>
+
+    <!-- Challenges Section (if available) -->
+    {
+      (challenges || whatWentWrong) && (challenges || whatWentWrong)!.length > 0 && (
+        <section class="case-study-section">
+          <h2>Challenges & Pivots</h2>
+          <ul class="challenges-list">
+            {(challenges || whatWentWrong)!.map((issue) => (
+              <li>{issue}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- Technical Deep Dive Section (if available) -->
+    {
+      (technicalDeepDive || recommendations) && (
+        technicalDeepDive?.security || technicalDeepDive?.performance || 
+        technicalDeepDive?.architecture || technicalDeepDive?.infrastructure ||
+        recommendations?.security || recommendations?.pwa
+      ) && (
+        <section class="case-study-section">
+          <h2>Technical Deep Dive</h2>
+          {(technicalDeepDive?.security || recommendations?.security) && (technicalDeepDive?.security || recommendations?.security)!.length > 0 && (
+            <div class="deep-dive-group">
+              <h3 class="deep-dive-subtitle">Security</h3>
+              <ul class="deep-dive-list">
+                {(technicalDeepDive?.security || recommendations?.security)!.map((rec) => (
+                  <li>{rec}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {technicalDeepDive?.performance && technicalDeepDive.performance.length > 0 && (
+            <div class="deep-dive-group">
+              <h3 class="deep-dive-subtitle">Performance</h3>
+              <ul class="deep-dive-list">
+                {technicalDeepDive.performance.map((rec) => (
+                  <li>{rec}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {(technicalDeepDive?.architecture || recommendations?.pwa) && (technicalDeepDive?.architecture || recommendations?.pwa)!.length > 0 && (
+            <div class="deep-dive-group">
+              <h3 class="deep-dive-subtitle">Architecture</h3>
+              <ul class="deep-dive-list">
+                {(technicalDeepDive?.architecture || recommendations?.pwa)!.map((rec) => (
+                  <li>{rec}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {technicalDeepDive?.infrastructure && technicalDeepDive.infrastructure.length > 0 && (
+            <div class="deep-dive-group">
+              <h3 class="deep-dive-subtitle">Infrastructure</h3>
+              <ul class="deep-dive-list">
+                {technicalDeepDive.infrastructure.map((rec) => (
+                  <li>{rec}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    <!-- Engineering Leadership Section (if available) -->
+    {
+      (engineeringLeadership || recruiterQA) && (engineeringLeadership || recruiterQA)!.length > 0 && (
+        <section class="case-study-section">
+          <h2>Engineering Leadership</h2>
+          <div class="leadership-qa">
+            {engineeringLeadership ? (
+              engineeringLeadership.map((item) => (
+                <div class="qa-item">
+                  <h3 class="qa-question">{item.question}</h3>
+                  <p class="qa-answer">{item.answer}</p>
+                </div>
+              ))
+            ) : (
+              recruiterQA!.map((qaItem) => {
+                const [question, answer] = Object.entries(qaItem)[0];
+                return (
+                  <div class="qa-item">
+                    <h3 class="qa-question">{question}</h3>
+                    <p class="qa-answer">{answer}</p>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Timeline Highlights Section (if available) -->
+    {
+      timelineHighlights && timelineHighlights.length > 0 && (
+        <section class="case-study-section">
+          <h2>Timeline Highlights</h2>
+          <ul class="timeline-list">
+            {timelineHighlights.map((highlight) => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     <!-- Additional MDX Content (if any) -->
     {
@@ -357,6 +630,125 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
       font-size: 1.125rem;
       line-height: 1.6;
       color: var(--color-text-secondary);
+    }
+
+    /* Project Links Styles */
+    .project-links-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .link-icon {
+      font-size: 1.125rem;
+    }
+
+    .link-text {
+      font-weight: 500;
+    }
+
+    /* Collaborators Styles */
+    .collaborators-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .collaborators-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .collaborators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .collaborator-card {
+      padding: 1rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .collaborator-info {
+      flex: 1;
+    }
+
+    .collaborator-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 0 0 0.25rem 0;
+    }
+
+    .collaborator-role {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .collaborator-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .collaborator-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .collaborator-link:hover {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
     }
 
     .case-study-section {
@@ -479,6 +871,286 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
       color: var(--color-text-secondary);
     }
 
+    /* Versions Timeline Styles */
+    .versions-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .version-item {
+      padding: 1.25rem;
+      border-left: 3px solid var(--color-accent);
+      background: var(--color-bg-secondary);
+      border-radius: 4px;
+    }
+
+    .version-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .version-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .version-period {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .version-changes {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    /* Product Features Styles */
+    .features-group {
+      margin-bottom: 2rem;
+    }
+
+    .features-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .features-subtitle {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .features-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    /* Core Value Styles */
+    .core-value-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .core-value-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .core-value-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    /* Challenges Styles */
+    .challenges-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .challenges-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .challenges-list li::before {
+      content: "⚠";
+      position: absolute;
+      left: 0;
+      color: #f59e0b;
+    }
+
+    /* What Went Wrong Styles - DEPRECATED */
+    .what-went-wrong-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .what-went-wrong-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .what-went-wrong-list li::before {
+      content: "⚠";
+      position: absolute;
+      left: 0;
+      color: #f59e0b;
+    }
+
+    /* Technical Deep Dive Styles */
+    .deep-dive-group {
+      margin-bottom: 2rem;
+    }
+
+    .deep-dive-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .deep-dive-subtitle {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .deep-dive-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .deep-dive-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .deep-dive-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
+    /* Recommendations Styles - DEPRECATED */
+    .recommendations-group {
+      margin-bottom: 2rem;
+    }
+
+    .recommendations-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .recommendations-subtitle {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .recommendations-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recommendations-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .recommendations-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
+    /* Engineering Leadership Styles */
+    .leadership-qa {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Recruiter Q&A Styles - DEPRECATED */
+    .recruiter-qa {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .qa-item {
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-bg-secondary);
+    }
+
+    .qa-question {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-accent);
+      text-transform: capitalize;
+    }
+
+    .qa-answer {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    /* Timeline Highlights Styles */
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .timeline-list li {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .timeline-list li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
     @media (max-width: 768px) {
       .case-study {
         padding: 1.5rem 1rem;
@@ -502,6 +1174,19 @@ const readingTime = formatReadingTime(calculateReadingTime(allText));
 
       .decision-item {
         padding: 1.25rem;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+
+      .project-link {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .collaborators-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>

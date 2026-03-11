@@ -69,6 +69,17 @@ const projectsCollection = defineCollection({
     /** Solution approach and strategy */
     approach: z.string(),
 
+    /** Project versions and evolution (optional) */
+    versions: z
+      .array(
+        z.object({
+          version: z.string(),
+          period: z.string(),
+          keyChanges: z.string(),
+        }),
+      )
+      .optional(),
+
     /** Key technical decisions with reasoning */
     keyDecisions: z.array(
       z.object({
@@ -80,6 +91,18 @@ const projectsCollection = defineCollection({
 
     /** Technologies and frameworks used */
     techStack: z.array(z.string()),
+
+    /** Core product value propositions (optional) */
+    coreValue: z.array(z.string()).optional(),
+
+    /** Product features (optional) - DEPRECATED: use coreValue instead */
+    productFeatures: z
+      .object({
+        core: z.array(z.string()).optional(),
+        secondary: z.array(z.string()).optional(),
+      })
+      .optional()
+      .nullable(),
 
     /** Project impact and results */
     impact: z.object({
@@ -96,8 +119,54 @@ const projectsCollection = defineCollection({
       qualitative: z.string(),
     }),
 
+    /** What went wrong (optional) - DEPRECATED: use challenges instead */
+    whatWentWrong: z.array(z.string()).optional(),
+
+    /** Challenges and pivots (optional) */
+    challenges: z.array(z.string()).optional(),
+
     /** Key learnings and takeaways */
     learnings: z.array(z.string()),
+
+    /** Technical deep dive sections (optional) */
+    technicalDeepDive: z
+      .object({
+        security: z.array(z.string()).optional(),
+        performance: z.array(z.string()).optional(),
+        architecture: z.array(z.string()).optional(),
+        infrastructure: z.array(z.string()).optional(),
+      })
+      .optional()
+      .nullable(),
+
+    /** Technical recommendations (optional) - DEPRECATED: use technicalDeepDive instead */
+    recommendations: z
+      .object({
+        security: z.array(z.string()).optional(),
+        pwa: z.array(z.string()).optional(),
+      })
+      .optional()
+      .nullable(),
+
+    /** Engineering leadership highlights (optional) */
+    engineeringLeadership: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .optional(),
+
+    /** Recruiter Q&A (optional) - DEPRECATED: use engineeringLeadership instead */
+    recruiterQA: z
+      .array(
+        z.record(z.string())
+      )
+      .optional(),
+
+    /** Timeline highlights (optional) - Consider using versions instead */
+    timelineHighlights: z.array(z.string()).optional(),
 
     /** Whether to feature on homepage */
     featured: z.boolean().default(false),
@@ -107,6 +176,30 @@ const projectsCollection = defineCollection({
 
     /** Custom sort order (lower numbers first) */
     order: z.number().optional(),
+
+    /** Project collaborators (optional) */
+    collaborators: z
+      .array(
+        z.object({
+          name: z.string(),
+          role: z.string(),
+          linkedin: z.string().url().optional(),
+          github: z.string().url().optional(),
+          website: z.string().url().optional(),
+        })
+      )
+      .optional(),
+
+    /** Project links (optional) */
+    projectLinks: z
+      .object({
+        live: z.string().url().optional(),
+        github: z.string().url().optional(),
+        archived: z.string().url().optional(),
+        figma: z.string().url().optional(),
+        demo: z.string().url().optional(),
+      })
+      .optional(),
 
     /** Related project slugs for cross-referencing */
     relatedProjects: z.array(z.string()).optional(),
