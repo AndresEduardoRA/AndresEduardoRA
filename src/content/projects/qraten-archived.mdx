@@ -6,7 +6,7 @@ duration: "Iterative dev (late 2024 - late 2025)"
 teamSize: 4
 outcomeSummary: "Functional product with landing page in production. Implemented a TOTP-based QR system enabling offline attendance registration; project archived while preparing a PWA rewrite."
 
-overview: "QRaten is an attendance tracking application based on QR codes designed to work even without an internet connection using TOTP-style codes. It originated from a real classroom problem: quickly registering attendance for large classes without relying on connectivity. I built the entire application end‑to‑end, leading architecture, development, infrastructure, and product decisions while collaborating with two designers for the UI and dashboard."
+overview: "QRaten is an attendance tracking application based on QR codes designed to work even without an internet connection using TOTP-style codes. It originated from a real classroom problem: quickly registering attendance for large classes without relying on connectivity. I built the entire application end‑to‑end, leading architecture, development, infrastructure, and product decisions while collaborating with two designers for the UI. The solution was developed as a complete ecosystem with functional parity across a Vue.js web application, a Flutter mobile client, and an early React Native prototype."
 
 problem: "Professors with large classes (90+ students) lose significant time manually taking attendance. Existing solutions mostly behave like spreadsheets and require internet connectivity. None provided a reliable offline-first system capable of registering attendance instantly during class while keeping infrastructure costs low."
 
@@ -31,9 +31,9 @@ versions:
   - version: "v4 — TOTP Architecture"
     period: "Late 2025"
     keyChanges: "Replaced Redis with a TOTP algorithm allowing QR generation and validation directly on the client. Backend migrated to Supabase for authentication and data management."
-  - version: "v5 — Manual Subscription System"
+  - version: "v5 — Web Platform & Subscriptions"
     period: "Late 2025 — archived"
-    keyChanges: "Built a super‑admin dashboard to manage subscriptions manually due to Stripe being unavailable in Bolivia. The project was paused afterwards and scheduled for a PWA redesign."
+    keyChanges: "Developed a full-featured web application with Vue.js, maintaining functional parity with the mobile clients. Included a super‑admin dashboard to manage subscriptions manually due to Stripe limitations in Bolivia."
 
 keyDecisions:
   - decision: "Adopt TOTP for offline QR validation"
@@ -55,8 +55,9 @@ keyDecisions:
       - "Firebase-based backend"
 
 techStack:
+  - "Web Platform: Vue.js (Full Web Application)"
   - "Mobile Frontend: Flutter"
-  - "Archived Mobile: React Native"
+  - "Archived Mobile: React Native (Functional Prototype)"
   - "Backend: Nest.js (early versions), Supabase (final iteration)"
   - "Database: PostgreSQL"
   - "Hosting: Vercel (landing), DigitalOcean (prototypes), Supabase Edge Functions"
@@ -120,6 +121,7 @@ frontmatterRecommendations:
 titleForFrontmatter: "QRaten — Offline QR Attendance (Archived)"
 shortSummary: "Offline-first attendance tracking system using TOTP QR codes designed for large university classrooms."
 tags:
+  - "Vue.js"
   - "PWA"
   - "Flutter"
   - "Supabase"
