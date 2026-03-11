@@ -1,0 +1,90 @@
+---
+title: "Building a Commercial Website for a Regenerative Medicine Clinic"
+role: "Full‑Stack & Project Lead"
+year: 2022
+duration: "1 week planned · ~3 months actual timeline"
+teamSize: 2
+outcomeSummary: "Delivered a professional marketing website for a regenerative medicine clinic, organizing 70+ services into a structured online presence that reduced repetitive explanations from the business owner and enabled digital marketing campaigns."
+
+overview: "Designed and built a commercial website for a regenerative medicine clinic to centralize and present over 70 medical services. The site functions as a professional digital presence and a reference resource that allows potential patients to explore treatments without requiring the clinic owner to manually explain each one."
+
+problem: "Before the website existed, most information about the clinic’s services lived in fragmented social media posts, primarily TikTok videos and private messages. Prospective patients frequently asked the same questions about treatments, forcing the owner to repeatedly explain services manually. This created operational friction and limited the clinic's ability to scale its marketing efforts."
+
+constraints:
+  - "The initial MVP was expected within one week to quickly provide a professional online presence."
+  - "Project timeline extended due to intermittent communication and delayed content delivery from the client."
+  - "The client had no technical background and delegated all technical and product decisions to the development team."
+  - "The system needed to remain simple, low‑cost, and easy to maintain long‑term."
+
+approach: "I implemented the website as a static architecture using Astro, prioritizing simplicity, fast loading times, and search engine discoverability. All content is stored directly within the project as static pages rather than relying on a database or CMS, reducing operational complexity and infrastructure costs. The site was deployed on a serverless hosting platform to streamline deployment and ensure reliable performance without managing servers."
+
+keyDecisions:
+  - decision: "Adopt a static‑first architecture"
+    reasoning: "The clinic’s services rarely change and the primary requirement was presenting structured information. A static architecture minimizes infrastructure overhead while improving   performance and SEO."
+    alternatives:
+      - "Traditional CMS such as WordPress"
+      - "Dynamic application with backend and database"
+  - decision: "Store all service content within the repository (content‑as‑code)"
+    reasoning: "Keeping content in the codebase simplified version control, deployment, and long‑term maintenance while avoiding the need for a separate database layer."
+    alternatives:
+      - "Headless CMS"
+      - "Database‑driven content system"
+  - decision: "Collaborate remotely with a dedicated designer"
+    reasoning: "Separating design and implementation responsibilities allowed faster development cycles. The designer focused on layout and visual identity while I handled architecture,   implementation, and deployment."
+    alternatives:
+      - "Developer‑driven design"
+      - "Adapting a prebuilt website template"
+  - decision: "Use serverless deployment for operations"
+    reasoning: "Serverless hosting removed the need for server maintenance and allowed fast deployments and easy domain configuration for the client."
+    alternatives:
+      - "Traditional VPS hosting"
+      - "Shared hosting platforms"
+
+techStack:
+  - "Astro"
+  - "Vercel"
+  - "Figma"
+  - "Google Analytics"
+  - "Google Search Console"
+
+impact:
+  metrics:
+    - label: "Services Documented"
+      value: "70+ medical services organized into structured pages"
+    - label: "Architecture"
+      value: "Fully static website (no backend or database required)"
+    - label: "Operational Complexity"
+      value: "Zero server maintenance using serverless deployment"
+    - label: "Marketing Readiness"
+      value: "Dedicated service pages usable as landing pages for campaigns"
+
+  qualitative: "The website centralized the clinic’s services into a structured and professional digital presence. Instead of repeatedly explaining treatments, the clinic owner can now share direct links to relevant service pages. The site also acts as a landing destination for marketing campaigns and social media outreach, turning previously fragmented information into a single, professional reference point for potential patients."
+
+learnings:
+  - "For small business products, simple static architectures often provide the best balance between performance, maintainability, and operational cost."
+  - "Working with non‑technical clients requires clear processes for collecting content and approvals to avoid delays."
+  - "Separating design and engineering responsibilities improves development velocity and product quality in small teams."
+  - "Delivering a fast MVP helps validate whether the product actually solves the client’s problem before investing in more complex features."
+
+featured: true
+status: ongoing
+order: 2
+relatedDecisions:
+  - "static-first-architecture"
+  - "content-as-code"
+---
+
+## Additional Context
+
+This project was one of my first professional client engagements. I worked with a remote designer to deliver a complete website for a regenerative medicine clinic.
+
+The goal was not to build a complex application but to create a clear, structured presentation of the clinic’s treatments so potential patients could easily understand the available services.
+
+Key features of the site include:
+
+- Structured pages describing each medical service
+- Clear navigation across the clinic’s treatment categories
+- Dedicated pages that can be used as landing pages for marketing campaigns
+- Analytics integration to monitor traffic and search indexing
+
+The project also provided experience working directly with a client, handling communication challenges, managing scope expectations, and delivering a production‑ready web product.
