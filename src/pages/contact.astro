@@ -63,25 +63,34 @@ const socialLinks = Object.entries(siteConfig.social)
     </section>
 
     <!-- Zone 2: Secondary (Social) -->
-    {
-      socialLinks.length > 0 && (
-        <section class="secondary-zone">
-          <h2>Elsewhere</h2>
-          <div class="social-links">
-            {socialLinks.map((link, index) => (
-              <>
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.platform}
-                </a>
-                {index < socialLinks.length - 1 && (
-                  <span class="separator">·</span>
-                )}
-              </>
-            ))}
+    <section class="secondary-zone">
+      <div class="secondary-item">
+        <h2>Download</h2>
+        <a href="/Andres_Alpiri_Resume.pdf" download class="cv-download-link">
+          Resume / CV
+        </a>
+      </div>
+
+      {
+        socialLinks.length > 0 && (
+          <div class="secondary-item">
+            <h2>Elsewhere</h2>
+            <div class="social-links">
+              {socialLinks.map((link, index) => (
+                <>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    {link.platform}
+                  </a>
+                  {index < socialLinks.length - 1 && (
+                    <span class="separator">·</span>
+                  )}
+                </>
+              ))}
+            </div>
           </div>
-        </section>
-      )
-    }
+        )
+      }
+    </section>
   </main>
 
   <style>
@@ -127,15 +136,33 @@ const socialLinks = Object.entries(siteConfig.social)
     .secondary-zone {
       padding-top: 3rem;
       border-top: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
 
-    .secondary-zone h2 {
+    .secondary-item h2 {
       font-size: 0.8125rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--color-text-muted);
       margin-bottom: 1rem;
+    }
+
+    .cv-download-link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 1.125rem;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .cv-download-link:hover {
+      color: var(--color-text);
+      border-bottom-color: var(--color-text);
     }
 
     .social-links {
