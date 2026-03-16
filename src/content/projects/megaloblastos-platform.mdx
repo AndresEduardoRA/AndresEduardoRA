@@ -1,49 +1,52 @@
 ---
-title: "Building a Platform Used by 70% of Medical Students"
+title: "Scaling a Student Platform Used by 70% of Medical Students"
 role: "Full-Stack Engineer"
 year: 2023
-duration: "2 weeks initial build + ongoing iterations"
+duration: "Initial build: 2 weeks | Ongoing development"
 teamSize: 1
-outcomeSummary: "Adopted by ~70% of medical students (1000+ monthly users), centralizing 300+ study resources and contributing to a student election victory."
+outcomeSummary: "Platform adopted by ~70% of the medical student body (1000+ monthly users) centralizing 300+ academic resources and evolving into the main academic hub for the community."
 
-overview: "Designed and built a centralized platform for medical students to access study materials, past exams, and academic resources. The system supports the full medical curriculum (43 subjects) and provides structured navigation from academic year down to specific materials. Originally developed to support the Megaloblastos student campaign and later evolved into the primary academic resource hub used by the majority of students."
+overview: "Designed and built a full-stack academic platform used by the majority of medical students to access study materials, past exams, and academic resources. The system organizes the entire medical curriculum (43 subjects) into a structured navigation model and provides tools for administrators to manage materials efficiently. Originally launched during a student election campaign, the platform evolved into the primary resource hub for the student community."
 
-problem: "Before the platform existed, study materials were scattered across Facebook posts, WhatsApp groups, Telegram chats, and external links. Students struggled to find specific resources and often ended up paying for materials that were already freely available. The university itself did not provide any centralized repository, leaving students to manually search through fragmented channels."
+problem: "Before the platform existed, study materials were fragmented across Facebook posts, WhatsApp groups, Telegram chats, and private drives. Students struggled to locate specific documents and often paid for materials that were already freely available. The university did not provide any centralized repository, creating constant friction when searching for academic resources."
 
 constraints:
-  - "Initial version had to be delivered in less than 2 weeks during an active student election campaign."
-  - "Very limited operational budget."
-  - "Platform needed to be simple enough for non-technical administrators to manage."
-  - "Must scale to hundreds of documents without increasing infrastructure costs."
-  - "Fast navigation and SEO were critical to allow students to find resources quickly."
+  - "Initial version had to be built in under 2 weeks during an active student election campaign."
+  - "Extremely limited operational budget."
+  - "System needed to be manageable by non-technical administrators."
+  - "Infrastructure costs had to remain minimal despite growing content."
+  - "Fast navigation and search engine visibility were critical."
 
-approach: "I designed a hybrid static-dynamic architecture using Astro to maximize SEO and performance while progressively introducing interactive features using Vue islands. The system relies heavily on static navigation for browsing academic structures (years, subjects, professors, exams), deferring database queries until users reach the final material level. This reduced backend requests by over 80% while keeping navigation extremely fast."
+approach: "The original platform was built using Astro with a static-first architecture optimized for SEO and navigation speed. As the project grew and new interactive features were required, I migrated the system to a full-stack architecture using Next.js while preserving the performance characteristics of the original system."
 
 keyDecisions:
-  - decision: "Use Astro with minimal JavaScript for the initial architecture"
-    reasoning: "Astro allowed me to generate static pages optimized for SEO and performance while keeping the JavaScript footprint minimal. This was ideal given the limited infrastructure and the need for fast indexing by search engines during the campaign."
+  - decision: "Static-first architecture for academic navigation"
+    reasoning: "The academic hierarchy (year → subject → professor → exam → material) changes very rarely. Implementing this structure statically allowed extremely fast navigation while minimizing backend requests."
     alternatives:
-      - "Next.js full SSR architecture"
-      - "Traditional CMS such as WordPress"
+      - "Fully dynamic database-driven navigation"
+      - "Traditional CMS taxonomy"
 
-  - decision: "Hybrid navigation with static academic hierarchy"
-    reasoning: "The academic hierarchy (year → subject → professor → exam → material) rarely changes, so I implemented it as static project data. This allows users to browse deeply without hitting the backend until the final material request, significantly reducing database load."
+  - decision: "Migration from Astro to Next.js full-stack architecture"
+    reasoning: "As the platform expanded with new interactive features such as dashboards, messaging, and administrative tools, a full-stack framework allowed easier backend logic management and better long-term scalability."
     alternatives:
-      - "Fully database-driven navigation"
-      - "CMS-managed taxonomy"
+      - "Continue extending Astro with additional server endpoints"
+      - "Move to a backend-heavy architecture with separate API services"
 
-  - decision: "External storage for study materials"
-    reasoning: "To reduce operational costs, the platform does not host files directly. Materials are uploaded to Google Drive and linked through the platform, allowing the system to scale to hundreds of documents without increasing storage or bandwidth costs."
+  - decision: "External storage for documents"
+    reasoning: "Study materials are stored on Google Drive instead of the application server. This keeps hosting costs minimal while allowing hundreds of documents to be served without bandwidth limitations."
     alternatives:
-      - "Self-hosted file storage"
-      - "Cloud storage (S3 or similar)"
+      - "Self-hosted storage"
+      - "Cloud object storage (S3 or similar)"
 
-  - decision: "Migration from Turso to Supabase"
-    reasoning: "As the platform evolved and required new features such as real-time chat and additional user services, Supabase provided more flexibility and built-in realtime capabilities."
+  - decision: "Backend powered by Supabase"
+    reasoning: "Supabase provides authentication, database, and real-time features with minimal infrastructure overhead, enabling rapid feature development for a solo project."
+    alternatives:
+      - "Self-hosted PostgreSQL with custom API"
+      - "Firebase"
 
 techStack:
-  - "Astro"
-  - "Vue (islands architecture)"
+  - "Next.js"
+  - "React"
   - "Supabase"
   - "WebSockets"
   - "Vercel"
@@ -53,23 +56,23 @@ techStack:
 impact:
   metrics:
     - label: "Adoption"
-      value: "~70% of medical students use the platform"
+      value: "~70% of medical students"
     - label: "Monthly Users"
-      value: "1000+ monthly users"
+      value: "1000+ active users"
     - label: "Study Resources"
-      value: "300+ academic documents centralized"
-    - label: "Indexed Pages"
-      value: "53 pages indexed by Google"
+      value: "300+ academic materials"
     - label: "Subjects Covered"
-      value: "43 subjects across the medical curriculum"
+      value: "43 subjects"
+    - label: "Indexed Pages"
+      value: "50+ pages indexed by Google"
 
-  qualitative: "The platform became the primary academic resource hub for the medical student community. By centralizing materials that were previously scattered across social networks and messaging platforms, students now save significant time and money searching for resources. The platform also played a key role during the Megaloblastos student campaign, helping the group achieve a historically large election victory margin."
+  qualitative: "The platform became the main academic hub used by the medical student community. By consolidating materials that were previously scattered across multiple channels, students can now quickly locate resources and avoid paying for documents that are already available."
 
 learnings:
-  - "Static-first architectures can dramatically reduce backend load when domain structures are predictable."
-  - "Deep hierarchical navigation improved both SEO and usability for non-technical users."
-  - "Cost-efficient infrastructure decisions (like external file hosting) allow platforms to scale quickly even with limited budgets."
-  - "Rapid development under real-world deadlines forces clearer architectural tradeoffs."
+  - "Static-first architectures can scale surprisingly well when domain structures are predictable."
+  - "Migrating architecture is easier when the original system separates navigation from dynamic content."
+  - "Early decisions that minimize infrastructure cost allow projects to grow organically."
+  - "Platforms built for real communities evolve faster than typical side projects."
 
 featured: true
 status: ongoing
@@ -79,31 +82,53 @@ relatedDecisions:
   - "external-document-storage"
 ---
 
-## Additional Context
+## Platform Evolution
 
-The initial version of the platform was built in just two weeks to support the Megaloblastos student campaign. The goal was not only to provide academic resources but also to demonstrate value to the student community.
+The project evolved through three major technical stages:
 
-The platform introduced a deep navigation model:
+```
+CLI prototype
+↓
+Astro static-first platform
+↓
+Next.js full-stack system
+```
+
+Each stage responded to the growing needs of the platform and the student community using it.
+
+The **CLI prototype** initially allowed administrators to manage materials from the command line.  
+The **Astro version** introduced a fast static interface optimized for browsing academic resources.  
+The **current Next.js version** supports more complex backend logic and interactive features.
+
+## Core Navigation Model
+
+The platform organizes academic materials using a hierarchical structure:
 
 ```
 year
- └ subject
-    └ professor
-       └ exam
-          └ material
+└ subject
+└ professor
+└ exam
+└ material
 ```
 
-Although this structure initially raised UX concerns, it ultimately improved SEO significantly and helped students intuitively find materials without relying on complex search systems.
+This model makes it possible to browse the entire curriculum without relying on complex search queries.
 
-Over time the platform evolved beyond its original purpose. New features were added including:
+## Features Added Over Time
 
-- real-time global chat for students
+As the platform matured, several additional services were introduced:
+
+- real-time student chat
 - private admin dashboard
-- material management system
-- study room reservations
+- study material management tools
+- study room reservation system
 - lab coat rental management
-- custom search system inspired by Algolia
+- custom search engine inspired by Algolia
 
-Despite the growing number of features, the platform continues to maintain fast loading times thanks to its static-first architecture and selective use of client-side JavaScript.
+## Links
 
-Here is the project: <a href="https://megaloblastos.com" target="_blank" rel="noopener noreferrer">megaloblastos.com</a> and here the github repo: <a href="https://github.com/AndresEduardoRA/cli-megaloblastos" target="_blank" rel="noopener noreferrer">cli-megaloblastos</a>
+Live platform  
+<a href="https://www.megaloblastos.com" target="_blank" rel="noopener noreferrer">www.megaloblastos.com</a>
+
+Current repository  
+<a href="https://github.com/AndresEduardoRA/cli-megaloblastos" target="_blank" rel="noopener noreferrer">https://github.com/AndresEduardoRA/cli-megaloblastos-archived</a>

@@ -1,0 +1,71 @@
+---
+title: "Archived Prototype: CLI Tool for Managing Academic Resources"
+role: "Software Engineer"
+year: 2023
+duration: "Initial exploration"
+teamSize: 1
+outcomeSummary: "Early prototype that explored how to manage academic materials through a command-line workflow before the platform evolved into a web application."
+
+overview: "Before the Megaloblastos platform existed as a web application, the project began as a command-line interface (CLI) tool designed to help organize and manage study materials for medical students. The tool allowed administrators to register subjects, professors, exams, and materials through a structured CLI workflow."
+
+problem: "Managing academic resources manually was slow and inconsistent. Documents were distributed across multiple messaging platforms, and there was no structured way to catalog them. The CLI prototype explored how administrators could quickly create and maintain a structured dataset representing the entire academic curriculum."
+
+constraints:
+  - "Needed to be extremely simple to implement."
+  - "No hosting infrastructure available yet."
+  - "The goal was rapid experimentation rather than production deployment."
+
+approach: "The CLI tool focused on modeling the academic hierarchy as structured data. Instead of building a full web platform immediately, I experimented with command-line commands to register and manage materials."
+
+keyDecisions:
+  - decision: "Use a CLI interface for rapid experimentation"
+    reasoning: "Building a command-line tool allowed quick iteration on the data structure and workflows before committing to a full web application."
+    alternatives:
+      - "Build a web interface immediately"
+      - "Use a CMS platform"
+
+  - decision: "Focus on modeling academic hierarchy first"
+    reasoning: "The most critical part of the system was the structure of the curriculum. Defining this early made it easier to transition the project into a web platform later."
+    alternatives:
+      - "Start with document storage"
+      - "Start with search features"
+
+techStack:
+  - "Node.js"
+  - "TypeScript"
+  - "CLI tooling"
+
+impact:
+  qualitative: "Although the CLI tool was never used directly by students, it played an important role in defining the core data model that later powered the Megaloblastos web platform."
+
+learnings:
+  - "Building a small prototype helps clarify the real structure of a system."
+  - "Early experiments reduce architectural mistakes later."
+  - "Even discarded prototypes can provide valuable insights."
+
+featured: false
+status: archived
+order: 3
+---
+
+## Why This Prototype Exists
+
+This CLI tool represents the **earliest technical exploration** of the Megaloblastos project.
+
+It helped answer key questions:
+
+- How should academic materials be structured?
+- What metadata is necessary to organize documents?
+- How should administrators manage materials efficiently?
+
+## Transition to the Web Platform
+
+After experimenting with the CLI workflow, it became clear that a **web-based interface was necessary** for students to access materials easily.
+
+The project then evolved into a **static-first platform built with Astro**, which later migrated to **Next.js** as the system grew.
+
+## Links
+
+Archived repository  
+
+<a href="https://github.com/AndresEduardoRA/cli-megaloblastos-archived" target="_blank" rel="noopener noreferrer">cli-megaloblastos-archived</a>
