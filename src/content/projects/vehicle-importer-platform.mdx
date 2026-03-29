@@ -1,0 +1,120 @@
+---
+title: "Custom Internal + Public Platform for a Vehicle Importer"
+role: "Full-Stack Developer"
+year: 2026
+duration: "10 days"
+teamSize: 1
+outcomeSummary: "Delivered a custom platform that centralizes prospects, clients, vehicle inventory, logistics, roles, and quotations for a vehicle importer, reducing manual work and improving response speed across internal and public workflows."
+
+overview: "Built a tailored system for a vehicle importer that combines a private operational dashboard with a public-facing experience for customers. The platform helps the company manage prospects, clients, vehicles, logistics, user roles, and quotation history in one place, while also allowing visitors to browse vehicles and request quotes through the public site."
+
+problem: "Before this system existed, the company managed operations in a fragmented way across Facebook, spreadsheets, and plain text notes. That created friction in several areas: vehicles were hard to find, quotations took too long, customer information was scattered, logistics were difficult to track, and internal roles were not clearly organized in a single system. On the public side, customers had trouble discovering available vehicles because most inventory lived in social media posts instead of a searchable catalog. On the internal side, the team lacked a centralized workflow for following up with prospects, generating quotes, and keeping a history of interactions."
+
+constraints:
+  - "The entire application had to be delivered in one week as a complete working solution."
+  - "The system needed to stay simple enough for non-technical users to adopt quickly."
+  - "Performance and responsiveness were important because quotation flows are critical to daily operations."
+  - "The architecture needed to be scalable for future changes without increasing unnecessary complexity."
+  - "The project had to minimize operational cost while still being production-ready."
+  - "Vehicle data ingestion needed to be functional quickly, so an external scraping workflow was used for the initial version."
+
+approach: "I designed the platform as a custom business system with a strong focus on quotation workflows, operational clarity, and a clean user experience. I built the application with Next.js and used Supabase as the backend to move fast without sacrificing structure. To accelerate delivery, I started from a dashboard template and adapted it into a domain-specific system for vehicle sales and logistics. The solution includes both private access for internal users and a public experience for customers, so the company can serve operational and commercial needs from the same platform."
+
+keyDecisions:
+  - decision: "Use Next.js for the front end and application layer"
+    reasoning: "Next.js allowed me to move quickly, reuse a dashboard foundation, and ship a polished full-stack product within the one-week timeline while keeping the codebase ready for future expansion."
+    alternatives:
+      - "Build a custom frontend from scratch"
+      - "Use a different full-stack framework such as NestJS with a separate frontend"
+
+  - decision: "Use Supabase as the backend"
+    reasoning: "Supabase reduced backend setup time by providing authentication, database, and infrastructure support out of the box. That made it easier to focus on business logic instead of spending the week assembling backend plumbing."
+    alternatives:
+      - "Build a custom backend with NestJS"
+      - "Use a traditional database plus custom auth layer"
+
+  - decision: "Prioritize quotation and history tracking as the core workflow"
+    reasoning: "Quotation is the most critical action in the business, so improving accuracy, speed, and traceability there had the highest immediate impact on operations and customer response times."
+    alternatives:
+      - "Start with inventory display only"
+      - "Focus first on logistics automation"
+
+  - decision: "Add both private and public views in one system"
+    reasoning: "The business needed a single platform that could serve internal staff and external customers. Combining both views reduced duplication and made the product more useful across the entire sales funnel."
+    alternatives:
+      - "Build only an internal CRM"
+      - "Build only a public catalog website"
+
+  - decision: "Use a scraping-based ingestion workflow for the first release"
+    reasoning: "The company needed a functional system as soon as possible, so I used Firecrawl to accelerate vehicle data extraction and delivery. This solved the short-term need while leaving room to replace it later with a more controlled ingestion pipeline if the business requires it."
+    alternatives:
+      - "Manually enter every vehicle"
+      - "Build a custom scraper immediately"
+      - "Integrate a full inventory management pipeline from day one"
+
+  - decision: "Keep the architecture simple and easy to maintain"
+    reasoning: "The company needed a system that staff could actually use every day without unnecessary complexity. A lean architecture also keeps maintenance costs low and makes future updates easier to implement."
+    alternatives:
+      - "Over-engineer for hypothetical scale"
+      - "Add advanced automation before validating core workflows"
+
+techStack:
+  - "Next.js"
+  - "Supabase"
+  - "Firecrawl"
+  - "Tailwind CSS"
+  - "Dashboard template"
+
+impact:
+  qualitative: "The platform turns a fragmented sales process into a structured workflow. Instead of searching through Facebook posts, notes, and spreadsheets, the team now has a centralized tool for finding vehicles, handling prospects, reviewing quotation history, and coordinating logistics. For customers, the public experience makes it easier to discover vehicles and request quotes. For the business, the system creates a more professional and scalable foundation for sales operations."
+
+metrics:
+  - label: "Estimated Audience Reach"
+    value: "~99k Facebook followers with potential monthly exposure of 10k–35k people through organic content and sharing"
+  - label: "Estimated New Leads per Month"
+    value: "~80–300 new prospects, depending on post activity, inventory rotation, and campaign performance"
+  - label: "Estimated Recurrent Users per Month"
+    value: "~150–500 returning visitors/customers following inventory updates, quote follow-ups, and referrals"
+  - label: "Estimated Vehicle Interactions per Month"
+    value: "~30–120 vehicles viewed, requested, or quoted through the platform in a typical active month"
+  - label: "Operational Time Saved"
+    value: "Quotation and vehicle lookup can become significantly faster by centralizing data and history in one system"
+
+learnings:
+  - "Fast delivery is possible when you combine a strong product focus with a practical technical stack."
+  - "Quotation workflows deserve special attention because they directly affect response time and sales efficiency."
+  - "A dashboard template can be a strategic advantage when the goal is to ship a business system quickly."
+  - "Using a managed backend like Supabase can drastically reduce implementation time without blocking future growth."
+  - "Scraping is useful for rapid launch, but it should be treated as a stepping stone if long-term data quality and control become important."
+  - "This project reinforced my confidence in building useful systems for larger businesses in a short time frame."
+
+featured: true
+status: ongoing
+order: 1
+relatedDecisions:
+  - "fast-product-delivery"
+  - "quotation-workflow-optimization"
+  - "managed-backend-architecture"
+---
+
+## Additional Context
+
+This project was built for a vehicle importer with an active social presence and a large number of potential customers discovering inventory through Facebook. The company needed a system that could support both internal operations and customer-facing browsing in one place.
+
+The public side helps customers find vehicles more easily instead of relying only on scattered social media posts. The private side supports the team with prospect management, client tracking, logistics, quotation history, and role-based access for advisers, invited users, administrators, and the owner.
+
+## Why This Project Matters
+
+The main value of this system is that it reduces fragmentation. Before this platform, the business relied on multiple disconnected tools and informal processes. Now there is a single product that organizes daily operations and gives the company a more professional way to sell and manage vehicles.
+
+## Notes on the Scraping Workflow
+
+The initial version uses Firecrawl to make the system functional quickly. That choice was made to support the first release under a very short timeline. A future version could replace or complement that workflow with a custom ingestion pipeline if the business needs more control, better validation, or deeper automation.
+
+## Links
+
+Live platform
+<a href="https://www.linkedin.com/posts/andresalpiri_softwareengineering-fullstack-nextjs-activity-7444131644116041728-8Iki?utm_source=share&utm_medium=member_desktop&rcm=ACoAADlcQT4BCvFYXqUL-xI4WJKdAX_uSV1J0PY" target="_blank" rel="noopener noreferrer">Video in linkedIn</a>
+
+Current repository
+<a href="https://github.com/AndresEduardoRA/cli-el-importador-de-vehiculos" target="_blank" rel="noopener noreferrer">https://github.com/AndresEduardoRA/cli-el-importador-de-vehiculos</a>
