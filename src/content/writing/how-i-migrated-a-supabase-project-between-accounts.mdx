@@ -1,0 +1,429 @@
+---
+title: "How I Migrated a Supabase Project Between Accounts Using Supabase CLI, Google Cloud Console, Docker, psql, and Terminal"
+description: "A complete walkthrough of migrating a production Supabase project from one account to another while preserving schema, data, authentication flow, and operational continuity."
+publishDate: 2026-03-18
+
+tags:
+  - supabase
+  - migration
+  - postgresql
+  - docker
+  - google-cloud
+  - devops
+  - database
+  - backend
+
+draft: false
+---
+
+### How I Migrated a Supabase Project Between Accounts Using Supabase CLI, Google Cloud Console, Docker, psql, and Terminal
+
+Migrating infrastructure is one of those tasks that sounds simple until you actually begin. In my case, I needed to move a Supabase project for **Megaloblastos** from one Supabase account to another.
+
+The reasons were practical: ownership centralization, better access control, cleaner billing separation, and long-term maintainability. The project had already accumulated real schema complexity, stored data, authentication settings, and production dependencies. Rebuilding manually was not an option.
+
+So I designed a controlled migration process using:
+
+- **Supabase CLI**
+- **Supabase Dashboard**
+- **Google Cloud Console**
+- **Docker**
+- **psql**
+- **Terminal automation**
+
+This article explains the full migration process, what worked, what failed, and what I would recommend to anyone doing the same.
+
+### Why the Migration Was Necessary
+
+The original project was created under an account that no longer matched the business structure of the application.
+
+That caused several long-term issues:
+
+- Wrong ownership of infrastructure
+- Billing attached to the wrong entity
+- Shared access managed through invites instead of proper ownership
+- Risk if the original account became inaccessible
+- Poor scalability for future team growth
+
+Instead of carrying technical debt at the account level, I decided to migrate everything properly.
+
+### Main Migration Goals
+
+Before touching anything, I defined success criteria:
+
+1. Preserve database schema
+2. Preserve all production data
+3. Keep authentication working
+4. Reconnect environment variables safely
+5. Minimize downtime
+6. Ensure rollback was possible
+
+Without clear goals, migrations become chaos.
+
+### Tech Stack Used
+
+- Supabase CLI
+- Supabase PostgreSQL
+- Docker
+- psql
+- Google Cloud Console
+- Bash / Terminal
+- Git
+- Environment variable management
+
+### Architecture Strategy
+
+Instead of copying pieces manually from the dashboard, I used a layered migration strategy:
+
+1. Export source database
+2. Create new destination project
+3. Recreate schema
+4. Import data safely
+5. Reconfigure secrets
+6. Validate services
+7. Cut traffic to new instance
+
+This reduced risk significantly.
+
+### Step 1: Auditing the Original Project
+
+Before migration, I audited:
+
+### Database
+
+- Tables
+- Views
+- Functions
+- Triggers
+- RLS policies
+- Extensions
+- Buckets references
+
+### Authentication
+
+- Providers enabled
+- Redirect URLs
+- JWT config
+- User count
+
+### Application Dependencies
+
+- Frontend env variables
+- Backend service role keys
+- CRON jobs
+- External integrations
+- Webhooks
+
+Never migrate blindly.
+
+## Step 2: Exporting Schema with Supabase CLI
+
+I used Supabase CLI to link the old project and pull schema state.
+
+```bash
+supabase login
+supabase link --project-ref OLD_PROJECT_REF
+supabase db pull
+```
+
+This gave me a versioned local representation of the schema.
+
+Benefits:
+
+- Trackable in Git
+- Re-runnable
+- Safer than manual recreation
+- Easier rollback
+
+## Step 3: Creating the New Project
+
+Inside the new Supabase account, I created a fresh project with:
+
+- Correct organization ownership
+- Proper billing owner
+- New database password
+- Region close to users
+- Clean access permissions
+
+This is the right moment to fix old mistakes.
+
+## Step 4: Accessing PostgreSQL Securely
+
+For direct migration tasks, I needed raw PostgreSQL access.
+
+I used:
+
+- Supabase connection strings
+- `psql`
+- Dockerized tooling when local dependencies conflicted
+
+Example:
+
+```bash
+psql "postgresql://postgres:password@host:5432/postgres"
+```
+
+This allowed more control than relying only on dashboards.
+
+## Step 5: Full Data Export
+
+I exported data using PostgreSQL-native tools.
+
+```bash
+pg_dump \
+--data-only \
+--column-inserts \
+--no-owner \
+--no-privileges \
+dbname > data.sql
+```
+
+Why data-only first?
+
+Because schema and data should be separated:
+
+- Schema is infrastructure
+- Data is business state
+
+This separation made debugging much easier.
+
+## Step 6: Rebuilding Schema in Destination
+
+Using CLI migrations:
+
+```bash
+supabase link --project-ref NEW_PROJECT_REF
+supabase db push
+```
+
+This recreated:
+
+- Tables
+- Constraints
+- Functions
+- Policies
+- Extensions
+
+Afterward, I manually verified differences in the dashboard.
+
+## Step 7: Importing Production Data
+
+Once schema was stable:
+
+```bash
+psql NEW_CONNECTION_URL < data.sql
+```
+
+I monitored:
+
+- Constraint failures
+- Duplicate rows
+- Sequence mismatches
+- Encoding issues
+
+After import, I reset sequences where needed:
+
+```sql
+SELECT setval('table_id_seq', MAX(id)) FROM table_name;
+```
+
+This is commonly forgotten and causes future inserts to fail.
+
+## Step 8: Authentication Migration Considerations
+
+Auth is where many migrations break.
+
+I reviewed:
+
+- Allowed redirect URLs
+- Email templates
+- OAuth provider credentials
+- Site URL
+- Anonymous access settings
+
+Then updated all environments to point to the new project.
+
+For some setups, users may need re-authentication depending on token signing changes.
+
+## Step 9: Storage Buckets and Assets
+
+Database migration does **not** automatically migrate files.
+
+So I separately audited:
+
+- Storage buckets
+- Public assets
+- Signed URL dependencies
+- File references stored in tables
+
+Where needed, assets were re-uploaded or copied.
+
+## Step 10: Updating Google Cloud Console
+
+Some services were integrated through Google Cloud.
+
+That required updating:
+
+- OAuth callback URLs
+- API credentials
+- Authorized origins
+- Secrets referencing old Supabase URLs
+
+This part is often overlooked.
+
+Even if the database is migrated perfectly, integrations can still fail externally.
+
+## Step 11: Updating Docker Environments
+
+Some containers depended on old variables.
+
+I rotated:
+
+```env
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+DATABASE_URL=
+```
+
+Then rebuilt containers:
+
+```bash
+docker compose up --build -d
+```
+
+This ensured no service was still pointing to the old infrastructure.
+
+## Step 12: Validation Checklist
+
+Before switching production traffic, I tested:
+
+### Functional
+
+- Sign up
+- Login
+- Password reset
+- CRUD flows
+- Admin actions
+
+### Data Integrity
+
+- Row counts
+- Important relationships
+- Timestamps
+- IDs
+
+### Security
+
+- RLS policies active
+- Admin keys restricted
+- Public routes correct
+
+### Performance
+
+- Query speed
+- Cold starts
+- API latency
+
+## Biggest Challenges
+
+### 1. Hidden Environment Variables
+
+The most common problem was old secrets still pointing to the old project.
+
+### 2. Sequence Counters
+
+Imported tables with integer IDs often need manual sequence reset.
+
+### 3. OAuth Redirect Mismatch
+
+Even one outdated callback URL breaks login.
+
+### 4. Storage Assumptions
+
+Many developers forget files live outside the relational database.
+
+## What Went Well
+
+- CLI-first workflow reduced dashboard mistakes
+- SQL dumps gave reliable backups
+- Docker made environment recreation fast
+- PostgreSQL tooling remained predictable
+- Validation checklist prevented launch surprises
+
+## Lessons Learned
+
+### Own Infrastructure Early
+
+Wrong ownership becomes expensive later.
+
+### Always Separate Schema from Data
+
+Treat them differently during migration.
+
+### Automate Everything Possible
+
+Manual clicks are hard to reproduce.
+
+### Keep Rollback Ready
+
+Never shut down the old system immediately.
+
+## Recommendations for Future Supabase Migrations
+
+### Technical
+
+- Use `supabase db pull` before any move
+- Store migrations in Git
+- Export data separately
+- Verify sequences after import
+- Test RLS policies explicitly
+
+### Operational
+
+- Freeze writes during final sync
+- Communicate maintenance windows
+- Keep old project alive temporarily
+- Rotate secrets after migration
+
+### Security
+
+- Regenerate service keys
+- Review invited members
+- Remove obsolete integrations
+
+## Final Result
+
+The Megaloblastos project was successfully migrated to the new Supabase account with:
+
+- Preserved schema
+- Preserved production data
+- Updated integrations
+- Cleaner ownership model
+- Better operational control
+
+The migration also removed future business risk and improved maintainability.
+
+## Final Thoughts
+
+Database migrations are rarely about moving tables. They are about transferring trust, ownership, and continuity.
+
+Supabase gives strong tooling, but success still depends on planning, discipline, and verification.
+
+If I had to summarize the whole process in one sentence:
+
+**Use dashboards for visibility, use CLI for reliability, and use SQL for truth.**
+
+## Useful Commands Recap
+
+```bash
+supabase login
+supabase link --project-ref PROJECT_REF
+supabase db pull
+supabase db push
+
+pg_dump dbname > backup.sql
+psql CONNECTION_URL < backup.sql
+
+docker compose up --build -d
+```
