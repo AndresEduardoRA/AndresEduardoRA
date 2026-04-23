@@ -1,0 +1,141 @@
+---
+title: "Imprenta Karins"
+role: "Solo developer"
+year: 2025
+duration: "Project delivery phase"
+teamSize: 1
+
+outcomeSummary: "A fully functional print-industry system for Imprenta Karins that was released publicly because the real value of the project depends on populating the product data."
+
+overview: "Imprenta Karins is a complete system built for a print business. The platform is operational, but its effectiveness depends on adding the product catalog and pricing data that drive real quotations. Because that data layer is the most valuable part, the project was published publicly so other people can also make use of it."
+
+problem: "Print businesses often need a structured way to manage product categories, configurable product options, quantity-based pricing, and quotation calculations. The challenge is not only building the software, but also representing the complexity of a real print catalog in a way that is maintainable and reusable."
+
+constraints:
+  - "The catalog can easily exceed 1,000 products once variants are included."
+  - "The system needed to support configurable products and price rules."
+  - "The data entry burden is substantial, so the product value depends heavily on content completeness."
+
+approach: "The project was designed around a normalized catalog and pricing engine. Categories, products, option groups, options, quantity pricing tiers, quote generation, and compatibility rules were modeled as first-class entities. That structure makes it possible to represent a real print workflow instead of a simplified e-commerce catalog."
+
+keyDecisions:
+  - decision: "Model products as configurable entities rather than static listings"
+    reasoning: "A print business does not sell simple one-size-fits-all items. Product configuration, variants, and pricing tiers are essential to the quoting process."
+    alternatives:
+      - "Use a flat product list"
+      - "Hard-code pricing in the UI"
+      - "Limit the system to a small fixed catalog"
+  - decision: "Publish the project publicly while the catalog is still incomplete"
+    reasoning: "The codebase and system design already provide value, and the missing part is mostly data population. Public access makes the work more reusable."
+    alternatives:
+      - "Keep it fully private"
+      - "Wait until every product is filled in"
+      - "Close the project after internal delivery only"
+
+techStack:
+  - "Supabase"
+  - "Next.js"
+  - "Database-driven catalog and quoting engine"
+
+productFeatures:
+core:
+  - "Category hierarchy for print products"
+  - "Configurable products with option groups"
+  - "Option-level price modifiers"
+  - "Quantity-based pricing"
+  - "Quote generation with tax calculation"
+secondary:
+  - "Product snapshots inside quotes"
+  - "Compatibility rules between options"
+  - "Public release for reusable access"
+  - "Admin-only data management"
+
+impact:
+  metrics:
+    - label: "Functional scope"
+      value: "The system already covers the full quotation workflow."
+    - label: "Data requirement"
+      value: "The catalog still needs more than 1,000 products and variants to reach its full operational value."
+  qualitative: "The project is valuable because the structure is already complete. Once the catalog data is filled in, the system can support real business operations with much less manual effort."
+
+whatWentWrong:
+  - "The product data is the bottleneck, not the software itself."
+  - "Without the full catalog, the system cannot yet deliver its maximum business value."
+
+learnings:
+  - "In catalog-heavy products, data completeness is as important as code quality."
+  - "A well-designed pricing model is what makes a print system scalable."
+  - "Publishing useful infrastructure can still be valuable even when the content layer is unfinished."
+
+recommendations:
+security:
+  - "Keep admin policies strict for product, pricing, and quotation management."
+  - "Validate any public-facing quote input to avoid tampering with pricing logic."
+  - "Protect the quote engine so pricing remains server-authoritative."
+pwa:
+  - "Not the main focus for this project, but mobile-friendly catalog browsing would still improve usability."
+  - "A lightweight quoting flow would help sales teams work faster on the go."
+
+recruiterQA:
+  - "Why was this project released publicly?": "Because the system itself is useful, but its real power depends on the data layer. Public release makes it reusable while the catalog is being completed."
+  - "What is left to finish?": "The main remaining task is populating the product catalog, variants, and pricing data."
+
+timelineHighlights:
+  - "The core system was built as a complete print-management foundation."
+  - "The project was published publicly once it became clear that the remaining value was mostly data entry and catalog completion."
+  - "The current focus is on filling in the product information needed to make the system fully operational."
+
+frontmatterRecommendations:
+titleForFrontmatter: "Imprenta Karins"
+shortSummary: "A fully functional print business system built around configurable products, pricing tiers, and quote generation."
+
+featured: true
+
+versions:
+  - version: "v1"
+    period: "Initial release"
+    keyChanges: "Core catalog, option, pricing, and quote engine implemented."
+  - version: "public release"
+    period: "Current"
+    keyChanges: "Released publicly because the structure is complete and the remaining value is in the product data."
+
+status: "archived"
+# order: 99
+
+relatedDecisions:
+  - "Public release improves reuse while the catalog is being completed."
+  - "Database modeling is central to the project's business value."
+
+tags:
+  - "imprenta"
+  - "quotes"
+  - "pricing"
+  - "catalog"
+---
+
+## Content
+
+### Overview
+Imprenta Karins is a fully functional print-industry system. The software is already built, but its full business value depends on filling in the product catalog, variants, and pricing information. Because the real value sits in the data and not only in the code, the project was published publicly so others can also benefit from it.
+
+### Product structure
+The data model is built around a print catalog that needs to handle categories, products, option groups, options, quantity pricing, and quotes. That structure is exactly what a real print business needs when quoting complex products. The schema includes categories, products, option groups, options, quantity pricing, compatibility rules, and quotes, plus server-side logic for calculating the final price.
+
+The quote engine is particularly important because it calculates a product's price based on quantity, option modifiers, and tax. The schema also stores product snapshots and selected options inside each quote, which helps preserve the state of the order at the time it was generated.
+
+### Problem
+Print businesses often need to quote products with variants, finishes, sizes, and quantity-dependent pricing. A simple catalog is not enough. The challenge is to make that complexity manageable and reusable, especially when the product count grows into the thousands.
+
+### Approach
+The project was built as a database-driven system instead of a flat catalog. That choice makes the pricing logic easier to maintain and the product configuration more scalable. The architecture also makes it possible to enforce business rules like option compatibility and admin-only management. The schema includes RLS-style restrictions for managing the catalog from privileged accounts.
+
+### Why it was published publicly
+The software is already useful, but the main remaining work is data population. Since the product catalog is what unlocks the real business value, releasing the project publicly makes sense: it lets others reuse the foundation while the missing content layer is being completed.
+
+### Impact
+The system already covers the full quotation workflow, so the foundation is strong. What remains is the data entry effort required to populate more than 1,000 products and their variants. Once that layer is complete, the project will be able to support real quoting operations with much less manual intervention.
+
+### Links
+Repository: https://github.com/AndresEduardoRA/beta-cli-imprenta-karins
+{/* Live demo: {{add demo URL here}}   */}
+{/* Business reference: {{add company or contact URL here if needed}} */}

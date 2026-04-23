@@ -1,0 +1,138 @@
+---
+title: "Miguel Rocha Community Platform"
+role: "Solo developer"
+year: 2026
+duration: "Planned / in development"
+teamSize: 1
+
+outcomeSummary: "A large community and monetization platform centered on Miguel Rocha's book, designed to sell books, grow the author's brand, and protect the content from piracy."
+
+overview: "This project aims to become a complete ecosystem around the book 'La estrategia para dominar occidente'. The platform is meant to support community building, content access, book sales, and long-term brand monetization while applying strong security and anti-piracy strategies."
+
+problem: "A successful author brand needs more than a storefront. It needs a controlled environment where readers can join a community, access content safely, and engage with the brand without making the product easy to copy, leak, or pirate."
+
+constraints:
+  - "The platform must support community growth and monetization at the same time."
+  - "Security and anti-piracy measures must be part of the core architecture, not added later."
+  - "The system needs to scale from a small launch audience to a larger long-term audience."
+
+approach: "The platform is being designed around a secure, role-based architecture. The schema already suggests a multi-tenant structure with institutions, courses, subcourses, invitations, memberships, and push subscriptions, which makes it possible to build gated spaces and controlled access layers. That structure is a strong base for a community product where access, roles, and participation must be carefully managed."
+
+keyDecisions:
+  - decision: "Build the product as a community platform instead of a simple book landing page"
+    reasoning: "A landing page can sell one item, but a community platform can support recurring engagement, deeper brand loyalty, and long-term monetization."
+    alternatives:
+      - "Single landing page with a checkout button"
+      - "Static author website"
+      - "Simple online store without membership features"
+  - decision: "Treat anti-piracy as a product requirement"
+    reasoning: "For a branded book project, protecting the content and controlling access are part of the user experience and business strategy."
+    alternatives:
+      - "Rely only on trust"
+      - "Add security after launch"
+      - "Avoid gated access entirely"
+
+techStack:
+  - "Next.js"
+  - "Supabase"
+  - "Role-based access control"
+  - "Invitation and membership model"
+  - "Community-first architecture"
+
+productFeatures:
+core:
+  - "Community access for readers"
+  - "Book sales and brand monetization"
+  - "Controlled membership and invitations"
+  - "Secure content access"
+secondary:
+  - "Push notifications"
+  - "Role-based participation"
+  - "Scalable structure for future content products"
+  - "Anti-piracy oriented access design"
+
+impact:
+  metrics:
+    - label: "Scope"
+      value: "Large enough to serve as both a community platform and a monetization engine."
+    - label: "Security focus"
+      value: "Anti-piracy is treated as a first-class product requirement."
+  qualitative: "The project is positioned as a long-term brand platform rather than a one-off sale. Its value comes from combining content, community, and secure distribution in one place."
+
+whatWentWrong:
+  - "The project is ambitious and needs careful scope control."
+  - "Security, content, and monetization requirements can easily become too broad if they are not prioritized."
+  - "The main risk is building too much too early without a clear release sequence."
+
+learnings:
+  - "Brand monetization becomes much stronger when the audience can be turned into a community."
+  - "Access control is not just a technical feature; it is part of the business model."
+  - "Projects that deal with premium intellectual property need security thinking from day one."
+
+recommendations:
+security:
+  - "Use server-side authorization for every sensitive action."
+  - "Make access gating and invitation flows explicit and auditable."
+  - "Minimize client exposure of protected content."
+  - "Add anti-copying and anti-leak measures to the content delivery flow."
+pwa:
+  - "A PWA layer could improve reach and reduce friction for community members."
+  - "Offline-friendly reading or browsing could be useful for selected content types."
+
+recruiterQA:
+  - "What is the goal of this project?": "To build a secure community and monetization platform around Miguel Rocha's book, turning the author brand into a product ecosystem."
+  - "Why is security so important here?": "Because the platform handles valuable intellectual property and needs to reduce piracy risk while keeping the community experience smooth."
+
+timelineHighlights:
+  - "The project was defined as a large brand ecosystem rather than a simple book site."
+  - "Security and anti-piracy were included in the architecture requirements from the beginning."
+  - "The platform is being shaped to support community growth, book sales, and long-term monetization."
+
+frontmatterRecommendations:
+titleForFrontmatter: "Miguel Rocha Community Platform"
+shortSummary: "A secure, community-driven platform for selling books, growing the author's brand, and reducing piracy risk."
+
+featured: true
+
+versions:
+  - version: "v1"
+    period: "Planning phase"
+    keyChanges: "Project scope defined around community, monetization, and anti-piracy."
+
+status: "archived"
+# order: 99
+
+relatedDecisions:
+  - "Role-based access supports gated community features."
+  - "Anti-piracy requirements influence the whole product architecture."
+
+tags:
+  - "community"
+  - "books"
+  - "security"
+  - "monetization"
+  - "anti-piracy"
+---
+
+## Content
+
+### Overview
+This project is intended to become a complete ecosystem around Miguel Rocha's book, **La estrategia para dominar occidente**. The goal is not only to sell the book, but also to build a community, strengthen the author's brand, and create a monetization layer that can grow over time.
+
+### Product idea
+A book brand becomes much more powerful when it is supported by a platform that can manage readers, access, and long-term engagement. This project is designed with that larger idea in mind. It is not just an online shop; it is a controlled environment where content, audience, and brand value can live together.
+
+### Architecture direction
+The schema direction supports a role-based and invitation-driven system with institutions, courses, subcourses, memberships, and push subscriptions. That kind of model is useful for gated communities and controlled access, which is exactly what a premium content platform needs. It gives the project the ability to manage user roles, entry points, and access boundaries in a structured way.
+
+### Security and anti-piracy
+Because the project is centered on a valuable book brand, security is part of the product, not just the infrastructure. The architecture needs to make protected content harder to extract, easier to control, and simpler to distribute only to the right users. Anti-piracy is therefore not an afterthought; it is one of the main design constraints.
+
+### Business goal
+The long-term objective is to convert the book into a broader digital brand: a place where readers can buy, join, follow, engage, and eventually return. That is what makes the project strategically large. It can grow from a book release into a real product ecosystem.
+
+{/* ### Links */}
+{/* Official author or brand site: {{add URL here}}   */}
+{/* GitHub repository: {{add repository URL here}}   */}
+{/* LinkedIn: {{add your LinkedIn URL here}}   */}
+{/* Community launch pages: {{add URLs here}} */}

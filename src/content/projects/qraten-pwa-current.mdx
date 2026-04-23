@@ -1,0 +1,158 @@
+---
+title: "QRaten PWA"
+role: "Solo developer and technical orchestrator"
+year: 2025
+duration: "2 weeks for the final public rebuild"
+teamSize: 1
+
+outcomeSummary: "A fully functional public PWA for attendance tracking, now live at app.qraten.com and supported by the marketing site qraten.com. This is the seventh rebuild of the product and the most stable version so far."
+
+overview: "QRaten PWA is the next planned step after /projects/qraten-archived. It is a public MVP designed to modernize attendance management through a fast, offline-capable web app. The project started in April 2025 and evolved through multiple rebuilds until it reached a production-ready public release."
+
+problem: "Attendance tracking is often fragmented, slow, and dependent on manual processes or dedicated native apps. QRaten was built to solve that problem with a simpler, more accessible PWA that works across use cases ranging from individual users to large institutions such as universities."
+
+constraints:
+  - "The MVP had to be built quickly while still being production-ready."
+  - "The app needed to support offline usage and remain usable across different device types and network conditions."
+  - "The product had to evolve from earlier attempts without carrying forward unnecessary complexity."
+
+approach: "The final version was built with a focus on execution speed, clarity, and stability. I used Next.js and Supabase as the core stack, and I worked with Claude AI in the free tier as an acceleration layer rather than as a replacement for product thinking. My role was to orchestrate the implementation, make the architectural decisions, and ensure the application shipped correctly. After six previous versions, the seventh rebuild benefited from accumulated product knowledge and a much more efficient development process."
+
+keyDecisions:
+  - decision: "Restart the project from scratch instead of continuing to patch previous versions"
+    reasoning: "The earlier builds had already taught me what the product needed. Starting fresh allowed me to remove accumulated complexity, simplify the architecture, and ship a cleaner MVP."
+    alternatives:
+      - "Refactor the old codebase incrementally"
+      - "Keep extending the sixth version"
+      - "Rebuild only the most problematic modules"
+  - decision: "Launch as a PWA first instead of publishing directly to app stores"
+    reasoning: "A PWA made it possible to validate real user behavior faster, reduce release friction, and test product-market fit before investing time in native store distribution."
+    alternatives:
+      - "Build native apps for iOS and Android first"
+      - "Release only as a private internal tool"
+      - "Delay launch until all store requirements were completed"
+
+techStack:
+  - "Next.js"
+  - "Supabase"
+  - "Claude AI (free tier)"
+  - "PWA architecture"
+
+productFeatures:
+core:
+  - "Attendance registration"
+  - "Offline-friendly operation"
+  - "Public production deployment"
+  - "Scalable structure for individuals, teams, institutions, and universities"
+secondary:
+  - "Marketing site separated from the application"
+  - "Continuous improvement-friendly architecture"
+  - "Foundation for future store releases and broader product expansion"
+
+impact:
+  metrics:
+    - label: "Development speed"
+      value: "The final public rebuild was completed in 2 weeks thanks to experience gained from the previous six versions."
+    - label: "Iteration count"
+      value: "This release is the seventh full rebuild of the product."
+    - label: "Production status"
+      value: "The application is live and fully functional at app.qraten.com."
+  qualitative: "The main qualitative impact is that the product is now publicly accessible, more stable, and better positioned for real-world validation. Formal usage metrics will be added after the public launch starts generating data."
+
+whatWentWrong:
+  - "Earlier versions became unnecessarily complex, which slowed progress and eventually forced a clean restart."
+  - "Multiple rebuilds were required before the product reached its current shape, which made the process longer than it needed to be."
+
+learnings:
+  - "For early validation, a PWA is often the most efficient path because it lets you observe user behavior before committing to app stores."
+  - "A product can become much faster to deliver once the architecture is simplified and the team learns from prior failed attempts."
+  - "AI is most valuable when it helps accelerate execution while the founder keeps control of product direction and quality."
+
+recommendations:
+security:
+  - "Protect authentication, session handling, and role-based access from the start, even in an MVP."
+  - "Keep secrets and environment variables out of the client and centralize sensitive logic on the server."
+  - "Review Supabase policies regularly so public access stays intentional rather than accidental."
+pwa:
+  - "Prioritize offline resilience and graceful sync behavior."
+  - "Keep the install and launch experience simple so users understand the value immediately."
+
+recruiterQA:
+  - "Why did you rebuild the product so many times?": "Because each rebuild surfaced a better product shape. The seventh version is the result of learning from the previous six, removing unnecessary complexity, and focusing on a stable public launch."
+  - "Why launch as a PWA first?": "Because it is the fastest way to validate adoption, observe user behavior, and prove the workflow before investing in native app store distribution."
+
+timelineHighlights:
+  - "April 2025: the project began and entered its first modern PWA phase."
+  - "After six rebuilds: the architecture was simplified and the product direction became much clearer."
+  - "Final two-week sprint: the seventh rebuild was completed and deployed publicly."
+
+frontmatterRecommendations:
+titleForFrontmatter: "QRaten PWA"
+shortSummary: "A public, production-ready PWA for attendance management, rebuilt seven times and finally launched as a stable MVP."
+
+featured: true
+
+versions:
+  - version: "v1"
+    period: "April 2025"
+    keyChanges: "Initial PWA concept and first implementation."
+  - version: "v6"
+    period: "Before the final restart"
+    keyChanges: "A first serious attempt at the PWA, later archived because the architecture had become too complex."
+  - version: "v7"
+    period: "Current public release"
+    keyChanges: "Complete rebuild, simplified structure, and production launch."
+
+status: "ongoing"
+order: 1
+
+relatedDecisions:
+  - "The archived QRaten version informed the cleaner rebuild."
+  - "The decision to launch as PWA-first shaped the public rollout strategy."
+
+tags:
+  - "pwa"
+  - "attendance"
+  - "supabase"
+  - "nextjs"
+  - "offline"
+---
+
+## Content
+
+### Overview
+QRaten PWA is the current production version of the project and the natural evolution of the archived QRaten effort. It was started in April 2025 and, after several rebuilds, it finally reached a stable public release. The application is now live at [app.qraten.com](https://app.qraten.com), while the marketing layer lives at [qraten.com](https://qraten.com).
+
+The product was designed as an attendance-management PWA that can work for very small use cases and also scale toward larger organizations such as institutions and universities. Its core value is modernizing attendance workflows while keeping the experience lightweight, accessible, and resilient in offline scenarios.
+
+### Problem
+Attendance management is still surprisingly manual in many contexts. QRaten was created to reduce friction, increase reliability, and make attendance capture usable in the real world even when connectivity is not ideal. The goal was not just to digitize a paper process, but to build a system that feels practical enough to use every day.
+
+### Approach
+The final release benefited from everything learned in the previous six rebuilds. Instead of keeping a bloated codebase alive, I restarted the product and rebuilt it with a cleaner mindset. Next.js and Supabase formed the base stack, and Claude AI in the free tier served as a productivity multiplier during implementation. My role was to direct the work, verify the architecture, and make sure the app came together correctly.
+
+The current version took only two weeks to develop because the hardest part had already been solved in the earlier attempts: understanding what the product should be and what it should not be. That experience made the final build much more efficient.
+
+### Product shape
+The current schema and product direction are aligned with a role-based, institutional attendance system. The model naturally supports attendance sessions, attendance records, memberships, invitations, and push subscriptions, which is the kind of structure needed for a product that must work across multiple organizational sizes.
+
+### Key decisions
+The most important decision was to restart the project from scratch rather than keep patching the older codebase. That made it possible to remove unnecessary complexity and ship a much cleaner MVP.
+
+Another critical decision was to launch as a PWA first. For a product that needs validation, the PWA path is the fastest way to test real usage before investing in native app-store releases. That learning is now part of the product strategy.
+
+### Impact
+This version is already production live, so the immediate impact is the public availability of the product. The next step is collecting usage data and turning that feedback into measurable growth. For now, the strongest signal is that the product has reached a state where it can be used and iterated publicly.
+
+### What went wrong
+The biggest issue across the project history was not the final version, but the earlier iterations. The sixth version became too complex and ultimately had to be abandoned. That was painful, but it was also the reason the final version could be significantly better.
+
+### Lessons learned
+The clearest lesson is that a PWA is an excellent first launch surface. It reduces friction, makes validation faster, and provides a realistic way to study how users behave before committing to larger distribution channels.
+
+### Links
+Live app: [app.qraten.com](https://app.qraten.com)
+
+Marketing site: [qraten.com](https://qraten.com)
+{/* LinkedIn: {{add your LinkedIn URL here}}   */}
+{/* Promotions and launch channels: {{add the URLs here}} */}

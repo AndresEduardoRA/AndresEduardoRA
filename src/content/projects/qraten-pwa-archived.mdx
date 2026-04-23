@@ -1,0 +1,125 @@
+---
+title: "QRaten PWA Archived"
+role: "Solo developer"
+year: 2025
+duration: "Version 6 phase"
+teamSize: 1
+
+outcomeSummary: "The sixth QRaten rebuild was the first serious PWA attempt, but it was eventually archived so the product could be rebuilt from scratch in a cleaner and more scalable way."
+
+overview: "This archived project represents the sixth version of QRaten. It was an important step in the product journey because it exposed the complexity problems that the final version later solved."
+
+problem: "The previous attempt was trying to become too much too early. The result was unnecessary complexity, slower progress, and an architecture that no longer matched the product's actual needs."
+
+constraints:
+  - "The project needed to prove the idea quickly, but the implementation became overengineered."
+  - "The architecture became harder to maintain than it should have been for an MVP."
+  - "The team size was effectively one person, so every extra layer of complexity had a direct cost."
+
+approach: "The sixth version was built as an exploratory PWA attempt. It helped validate the product direction, but it also made clear that the right move was to stop patching the old implementation and start over with a better plan. In practice, the archived version became the product's best teacher."
+
+keyDecisions:
+  - decision: "Archive the sixth version instead of trying to preserve it"
+    reasoning: "The architecture had become too complex, and a fresh rebuild would be faster and safer than forcing the old version to continue."
+    alternatives:
+      - "Continue refactoring the same codebase"
+      - "Keep adding features on top of the old structure"
+      - "Freeze the project indefinitely"
+  - decision: "Treat the archived version as product research"
+    reasoning: "The work was not wasted. It clarified the technical and product boundaries that the final version needed to respect."
+    alternatives:
+      - "Discard everything learned"
+      - "Reuse the code without changing the approach"
+      - "Start a completely unrelated product"
+
+techStack:
+  - "Next.js"
+  - "Supabase"
+  - "PWA architecture"
+
+productFeatures:
+core:
+  - "First major attempt at a QRaten PWA"
+  - "Attendance-oriented product direction"
+  - "Early validation of offline-capable workflow ideas"
+secondary:
+  - "Technical experimentation"
+  - "Architecture discovery"
+  - "Product-shape learning"
+
+impact:
+  metrics:
+    - label: "Version number"
+      value: "This was QRaten version 6."
+    - label: "Strategic value"
+      value: "It directly informed the cleaner seventh rebuild."
+  qualitative: "Although the project was archived, it had high strategic value because it revealed which parts of the product were worth keeping and which parts should be redesigned."
+
+whatWentWrong:
+  - "The implementation grew in complexity faster than the product needed."
+  - "The structure was not efficient enough to support a simple and reliable MVP."
+  - "The project was eventually abandoned so the lessons could be applied to a better rebuild."
+
+learnings:
+  - "A failed version is still valuable when it clarifies what the real product should be."
+  - "Archiving a version can be a strong product decision when it prevents long-term technical drag."
+  - "A simpler architecture is usually the better choice for an MVP."
+
+recommendations:
+security:
+  - "Keep access control and data policies minimal but explicit."
+  - "Avoid expanding the attack surface by adding features before the core workflow is stable."
+  - "Review authentication and database rules before every public release."
+pwa:
+  - "Use the simplest possible PWA structure that still covers the core workflow."
+  - "Validate real usage before investing in native distribution or advanced integrations."
+
+recruiterQA:
+  - "Why was this version archived?": "Because it became unnecessarily complex and would have taken more time to untangle than to rebuild."
+  - "Was the work wasted?": "No. It became the foundation for the final public version, which is much cleaner and faster."
+
+timelineHighlights:
+  - "Version 6 became the first serious PWA attempt."
+  - "The project was archived after its complexity outgrew its usefulness."
+  - "The lessons from this version directly shaped the current QRaten release."
+
+frontmatterRecommendations:
+titleForFrontmatter: "QRaten PWA Archived"
+shortSummary: "The archived sixth version of QRaten, kept as a learning milestone that led to a much better rebuild."
+
+featured: false
+
+versions:
+  - version: "v6"
+    period: "Archived phase"
+    keyChanges: "First serious PWA attempt, later abandoned because the architecture became too complex."
+
+status: "archived"
+# order: 99
+
+relatedDecisions:
+  - "This archive directly led to the clean seventh rebuild."
+  - "The PWA-first validation strategy was refined after this version."
+
+tags:
+  - "archived"
+  - "pwa"
+  - "lessons"
+  - "rebuild"
+---
+
+## Content
+
+### Overview
+This project is the sixth version of QRaten and the first serious attempt to turn the idea into a PWA. It mattered because it showed where the product was starting to work and where it was becoming too complicated.
+
+### Why it was archived
+The main reason for archiving it was simple: the project had become more complex than the problem it was supposed to solve. Instead of keeping that complexity and building on top of it, the better move was to start over and apply the lessons to a cleaner version.
+
+### What this version taught
+The archived build clarified the importance of keeping the architecture lean. It also showed that early product validation should focus on the shortest path to a usable experience, not on trying to anticipate every possible future requirement.
+
+### Links
+Repository: https://github.com/AndresEduardoRA/archived-qraten-pwa-old
+
+Related project: [Current QRaten PWA](./qraten-pwa-current)
